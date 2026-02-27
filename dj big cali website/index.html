@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DJ Big Cali | Official Website</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Preload iOS video posters to prevent grey box flash -->
+    <link rel="preload" href="big-cali-turntable-poster.jpg" as="image">
+    <link rel="preload" href="dj-caligreen-poster.jpg" as="image">
+    <link rel="preload" href="dj-caliblue-poster.jpg" as="image">
+
     <style>
         /* ===== RESET & BASE ===== */
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -29,7 +40,8 @@
         }
 
         /* ===== LENIS CSS (from docs) ===== */
-        html.lenis, html.lenis body {
+        html.lenis,
+        html.lenis body {
             height: auto;
         }
 
@@ -101,7 +113,7 @@
             width: auto;
             opacity: 0;
             will-change: transform, opacity;
-            filter: drop-shadow(0 0 40px rgba(201,168,76,0));
+            filter: drop-shadow(0 0 40px rgba(201, 168, 76, 0));
         }
 
         .intro-logo-left {
@@ -144,7 +156,7 @@
             width: 700px;
             height: 700px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.04) 40%, transparent 70%);
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.12) 0%, rgba(201, 168, 76, 0.04) 40%, transparent 70%);
             opacity: 0;
             pointer-events: none;
         }
@@ -158,10 +170,21 @@
             opacity: 0;
         }
 
-        .intro-line-1 { left: 20%; }
-        .intro-line-2 { left: 40%; }
-        .intro-line-3 { left: 60%; }
-        .intro-line-4 { left: 80%; }
+        .intro-line-1 {
+            left: 20%;
+        }
+
+        .intro-line-2 {
+            left: 40%;
+        }
+
+        .intro-line-3 {
+            left: 60%;
+        }
+
+        .intro-line-4 {
+            left: 80%;
+        }
 
         /* ===== VIDEO BACKGROUND (PARALLAX) ===== */
         .video-bg {
@@ -193,6 +216,8 @@
             height: 120vh;
             object-fit: cover;
             will-change: transform;
+            opacity: 1;
+            visibility: visible;
         }
 
         /* ===== MAIN CONTENT WRAPPER ===== */
@@ -408,8 +433,17 @@
         }
 
         @keyframes scrollPulse {
-            0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
-            50% { opacity: 1; transform: scaleY(1); }
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scaleY(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
         }
 
         /* ===== MARQUEE ===== */
@@ -509,7 +543,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%);
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.6) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -660,14 +694,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             cursor: pointer;
             transition: background 0.4s ease, opacity 0.4s ease;
             z-index: 2;
         }
 
         .video-play-overlay:hover {
-            background: rgba(0,0,0,0.15);
+            background: rgba(0, 0, 0, 0.15);
         }
 
         .video-play-overlay.hidden {
@@ -689,7 +723,7 @@
         .video-play-overlay:hover .video-play-btn {
             transform: scale(1.15);
             background: rgba(201, 168, 76, 0.15);
-            box-shadow: 0 0 40px rgba(201,168,76,0.2);
+            box-shadow: 0 0 40px rgba(201, 168, 76, 0.2);
         }
 
         .video-play-btn svg {
@@ -773,7 +807,7 @@
             left: 0;
             right: 0;
             padding: 30px 20px 20px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
         }
 
         .mix-card-title {
@@ -869,10 +903,11 @@
         /* Parallax background layer — sits behind the bento grid */
         .bento-bg {
             position: absolute;
-            inset: -80px; /* overscan so movement never shows a gap */
+            inset: -80px;
+            /* overscan so movement never shows a gap */
             background:
-                radial-gradient(ellipse 90% 65% at 50% 65%, rgba(201,168,76,0.09) 0%, rgba(201,168,76,0.03) 45%, transparent 70%),
-                radial-gradient(ellipse 55% 35% at 15% 15%, rgba(255,255,255,0.012) 0%, transparent 60%);
+                radial-gradient(ellipse 90% 65% at 50% 65%, rgba(201, 168, 76, 0.09) 0%, rgba(201, 168, 76, 0.03) 45%, transparent 70%),
+                radial-gradient(ellipse 55% 35% at 15% 15%, rgba(255, 255, 255, 0.012) 0%, transparent 60%);
             z-index: 0;
             pointer-events: none;
             will-change: transform;
@@ -896,16 +931,55 @@
         }
 
         /* Span assignments for organic layout */
-        .bento-item:nth-child(1)  { grid-column: span 2; grid-row: span 2; }
-        .bento-item:nth-child(2)  { grid-column: span 3; grid-row: span 1; }
-        .bento-item:nth-child(3)  { grid-column: span 1; grid-row: span 1; }
-        .bento-item:nth-child(4)  { grid-column: span 2; grid-row: span 1; }
-        .bento-item:nth-child(5)  { grid-column: span 1; grid-row: span 2; }
-        .bento-item:nth-child(6)  { grid-column: span 2; grid-row: span 1; }
-        .bento-item:nth-child(7)  { grid-column: span 2; grid-row: span 1; }
-        .bento-item:nth-child(8)  { grid-column: span 3; grid-row: span 2; }
-        .bento-item:nth-child(9)  { grid-column: span 2; grid-row: span 1; }
-        .bento-item:nth-child(10) { grid-column: span 2; grid-row: span 1; }
+        .bento-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .bento-item:nth-child(2) {
+            grid-column: span 3;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(3) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(4) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(5) {
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+
+        .bento-item:nth-child(6) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(7) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(8) {
+            grid-column: span 3;
+            grid-row: span 2;
+        }
+
+        .bento-item:nth-child(9) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(10) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
 
         .bento-item {
             position: relative;
@@ -1021,7 +1095,7 @@
             top: 24px;
             right: 28px;
             background: none;
-            border: 1px solid rgba(255,255,255,0.25);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             color: var(--off-white);
             font-size: 1.4rem;
             width: 44px;
@@ -1037,7 +1111,7 @@
         }
 
         .lightbox-close:hover {
-            background: rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.12);
             border-color: var(--accent);
             color: var(--accent);
         }
@@ -1046,8 +1120,8 @@
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             color: var(--off-white);
             width: 52px;
             height: 52px;
@@ -1062,13 +1136,18 @@
         }
 
         .lightbox-arrow:hover {
-            background: rgba(201,168,76,0.15);
+            background: rgba(201, 168, 76, 0.15);
             border-color: var(--accent);
             color: var(--accent);
         }
 
-        .lightbox-prev { left: 20px; }
-        .lightbox-next { right: 20px; }
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
 
         .lightbox-counter {
             position: fixed;
@@ -1078,7 +1157,7 @@
             font-family: 'Oswald', sans-serif;
             font-size: 0.8rem;
             letter-spacing: 4px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             z-index: 9001;
             pointer-events: none;
         }
@@ -1581,68 +1660,284 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            section { padding: 80px 40px; }
-            .about { grid-template-columns: 1fr; gap: 40px; }
-            .events-layout { grid-template-columns: 1fr; gap: 40px; }
-            .gallery-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
-            .gallery { padding: 100px 40px; }
-            .featured-video { padding: 100px 40px; }
-            .intro-logo { max-height: 320px; }
-            .bento-grid { grid-template-columns: repeat(3, 1fr); }
-            .bento-item:nth-child(1)  { grid-column: span 2; grid-row: span 2; }
-            .bento-item:nth-child(2)  { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(3)  { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(4)  { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(5)  { grid-column: span 1; grid-row: span 2; }
-            .bento-item:nth-child(6)  { grid-column: span 2; grid-row: span 1; }
-            .bento-item:nth-child(7)  { grid-column: span 2; grid-row: span 1; }
-            .bento-item:nth-child(8)  { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(9)  { grid-column: span 2; grid-row: span 1; }
-            .bento-item:nth-child(10) { grid-column: span 1; grid-row: span 1; }
+            section {
+                padding: 80px 40px;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .events-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .gallery {
+                padding: 100px 40px;
+            }
+
+            .featured-video {
+                padding: 100px 40px;
+            }
+
+            .intro-logo {
+                max-height: 320px;
+            }
+
+            .bento-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .bento-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            .bento-item:nth-child(2) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(3) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(4) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(5) {
+                grid-column: span 1;
+                grid-row: span 2;
+            }
+
+            .bento-item:nth-child(6) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(7) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(8) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(9) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(10) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
         }
 
         @media (max-width: 768px) {
-            .site-header { padding: 0 24px; }
-            .nav-links, .nav-cta, .booking-dropdown { display: none; }
-            .menu-toggle { display: flex; }
-            .mobile-nav { display: flex; }
-            section { padding: 60px 24px; }
-            .hero-tagline { font-size: 0.8rem; letter-spacing: 3px; }
-            .mixes-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .mixes-grid { grid-template-columns: 1fr; }
-            .stat-row { gap: 30px; }
-            .booking-cta { padding: 100px 24px; }
-            .subscribe-form { flex-direction: column; }
-            .subscribe-form input { border-right: 1px solid rgba(255, 255, 255, 0.15); border-bottom: none; }
-            .footer-inner { flex-direction: column; gap: 30px; text-align: center; }
-            .about-image { height: 350px; }
-            .gallery-grid { grid-template-columns: 1fr; gap: 16px; }
-            .gallery { padding: 80px 24px; }
-            .gallery-item { aspect-ratio: 4/5; }
-            .featured-video { padding: 80px 24px; }
-            .featured-video-wrapper::before { top: -8px; left: -8px; right: -8px; bottom: -8px; }
-            .video-play-btn { width: 70px; height: 70px; }
-            .behind-videos-container { flex-direction: column; }
-            .intro-logo { max-height: 220px; }
-            .intro-glow { width: 400px; height: 400px; }
-            .bento-grid { grid-template-columns: repeat(2, 1fr); }
-            .bento-item:nth-child(1)  { grid-column: span 2; grid-row: span 1; }
-            .bento-item:nth-child(2)  { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(3)  { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(4)  { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(5)  { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(6)  { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(7)  { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(8)  { grid-column: span 2; grid-row: span 1; }
-            .bento-item:nth-child(9)  { grid-column: span 1; grid-row: span 1; }
-            .bento-item:nth-child(10) { grid-column: span 1; grid-row: span 1; }
-            .bento-item { min-height: 130px; }
-            .lightbox-arrow { width: 40px; height: 40px; font-size: 1rem; }
-            .lightbox-prev { left: 10px; }
-            .lightbox-next { right: 10px; }
-            .service-section { padding: 80px 24px; }
-            .service-section + .service-section { padding-top: 0; }
-            .mc-overlay-text { font-size: 1rem; letter-spacing: 2px; }
+            .site-header {
+                padding: 0 24px;
+            }
+
+            .nav-links,
+            .nav-cta,
+            .booking-dropdown {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: flex;
+            }
+
+            section {
+                padding: 60px 24px;
+            }
+
+            .hero-tagline {
+                font-size: 0.8rem;
+                letter-spacing: 3px;
+            }
+
+            .mixes-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .mixes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-row {
+                gap: 30px;
+            }
+
+            .booking-cta {
+                padding: 100px 24px;
+            }
+
+            .subscribe-form {
+                flex-direction: column;
+            }
+
+            .subscribe-form input {
+                border-right: 1px solid rgba(255, 255, 255, 0.15);
+                border-bottom: none;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .about-image {
+                height: 350px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .gallery {
+                padding: 80px 24px;
+            }
+
+            .gallery-item {
+                aspect-ratio: 4/5;
+            }
+
+            .featured-video {
+                padding: 80px 24px;
+            }
+
+            .featured-video-wrapper::before {
+                top: -8px;
+                left: -8px;
+                right: -8px;
+                bottom: -8px;
+            }
+
+            .video-play-btn {
+                width: 70px;
+                height: 70px;
+            }
+
+            .behind-videos-container {
+                flex-direction: column;
+            }
+
+            .intro-logo {
+                max-height: 220px;
+            }
+
+            .intro-glow {
+                width: 400px;
+                height: 400px;
+            }
+
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bento-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(2) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(3) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(4) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(5) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(6) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(7) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(8) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(9) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(10) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item {
+                min-height: 130px;
+            }
+
+            .lightbox-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+
+            .service-section {
+                padding: 80px 24px;
+            }
+
+            .service-section+.service-section {
+                padding-top: 0;
+            }
+
+            .mc-overlay-text {
+                font-size: 1rem;
+                letter-spacing: 2px;
+            }
+
             /* ---- Mobile: stack service cards vertically (no horizontal scroll) ---- */
             .services-scroll-track {
                 flex-direction: column;
@@ -1650,21 +1945,26 @@
                 scroll-snap-type: none;
                 gap: 1.5rem;
             }
+
             .service-card {
                 width: 100%;
                 flex: none;
             }
-            .service-card-img-wrap img { height: 220px; }
+
+            .service-card-img-wrap img {
+                height: 220px;
+            }
         }
 
         /* ===== SERVICE SECTIONS SHARED ===== */
         .service-section {
             background: var(--black);
             padding: 120px 60px;
-            overflow: hidden; /* contain parallax travel */
+            overflow: hidden;
+            /* contain parallax travel */
         }
 
-        .service-section + .service-section {
+        .service-section+.service-section {
             padding-top: 0;
         }
 
@@ -1696,7 +1996,7 @@
             position: relative;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
             background: var(--dark-gray);
         }
 
@@ -1847,7 +2147,7 @@
         .mc-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1922,7 +2222,7 @@
         .lightbox-arrow:focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 3px;
-            background: rgba(201,168,76,0.15);
+            background: rgba(201, 168, 76, 0.15);
             border-color: var(--accent);
         }
 
@@ -1946,7 +2246,10 @@
 
         /* ===== PREFERS-REDUCED-MOTION ===== */
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
+
+            *,
+            *::before,
+            *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
@@ -1970,6 +2273,7 @@
         }
     </style>
 </head>
+
 <body class="intro-active">
 
     <!-- ===== LOGO INTRO OVERLAY ===== -->
@@ -1991,7 +2295,7 @@
 
     <!-- ===== FIXED VIDEO BACKGROUND ===== -->
     <div class="video-bg">
-        <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="dj1.png" id="bgVideo">
+        <video class="hero-bg-video" autoplay muted playsinline loop preload="auto" aria-hidden="true">
             <source src="dj-turntable.mp4" type="video/mp4">
         </video>
     </div>
@@ -2020,12 +2324,16 @@
                 <li><a href="#events">Weddings</a></li>
             </ul>
             <div class="booking-dropdown" id="bookingDropdown">
-                <button class="nav-cta booking-trigger" id="bookingTrigger" type="button" aria-expanded="false">Book Now</button>
+                <button class="nav-cta booking-trigger" id="bookingTrigger" type="button" aria-expanded="false">Book
+                    Now</button>
                 <div class="booking-dropdown-panel" id="bookingPanel">
                     <div class="booking-dropdown-header">
                         <h3>Book DJ Big Cali</h3>
                         <button class="booking-close" id="bookingClose" type="button" aria-label="Close booking form">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                            </svg>
                         </button>
                     </div>
                     <form class="booking-form" id="header-booking-form" action="#" method="POST">
@@ -2035,7 +2343,8 @@
                         </div>
                         <div class="booking-form-group">
                             <label for="header-booking-email">Email</label>
-                            <input type="email" id="header-booking-email" name="email" placeholder="your@email.com" required>
+                            <input type="email" id="header-booking-email" name="email" placeholder="your@email.com"
+                                required>
                         </div>
                         <div class="booking-form-group">
                             <label for="header-booking-phone">Phone</label>
@@ -2058,11 +2367,14 @@
                         </div>
                         <div class="booking-form-group">
                             <label for="header-booking-message">Details</label>
-                            <textarea id="header-booking-message" name="message" rows="3" placeholder="Tell us about your event..."></textarea>
+                            <textarea id="header-booking-message" name="message" rows="3"
+                                placeholder="Tell us about your event..."></textarea>
                         </div>
                         <button type="submit" class="booking-form-submit">
                             <span>Send Inquiry</span>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                            </svg>
                         </button>
                         <p class="booking-form-note">We typically respond within 24 hours</p>
                     </form>
@@ -2121,9 +2433,18 @@
                     Big Cali reads the room and delivers the perfect soundtrack for any occasion.
                 </p>
                 <div class="stat-row gs-reveal">
-                    <div class="stat"><div class="stat-number">500+</div><div class="stat-label">Events</div></div>
-                    <div class="stat"><div class="stat-number">10+</div><div class="stat-label">Years</div></div>
-                    <div class="stat"><div class="stat-number">TX</div><div class="stat-label">Based</div></div>
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Events</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Years</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">TX</div>
+                        <div class="stat-label">Based</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2156,23 +2477,29 @@
             </div>
             <div class="featured-video-wrapper gs-reveal">
                 <div class="featured-video-player">
-                    <video id="featuredVideo" playsinline preload="metadata" controls>
+                    <video id="featuredVideo" playsinline preload="metadata" controls
+                        poster="big-cali-turntable-poster.jpg"
+                        style="background: transparent url('big-cali-turntable-poster.jpg') 50% 50% / cover no-repeat;">
                         <source src="big-cali-turntable-video.mp4" type="video/mp4">
                     </video>
                     <div class="video-play-overlay" id="videoOverlay" onclick="toggleFeaturedVideo()">
                         <div class="video-play-btn">
-                            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg>
                         </div>
                     </div>
                 </div>
                 <p class="featured-video-caption">DJ Big Cali &mdash; Live Session</p>
             </div>
             <div class="behind-videos-container">
-                <video class="behind-video" playsinline preload="metadata" controls>
+                <video class="behind-video" playsinline preload="metadata" controls poster="dj-caligreen-poster.jpg"
+                    style="background: transparent url('dj-caligreen-poster.jpg') 50% 50% / cover no-repeat;">
                     <source src="dj-caligreen.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <video class="behind-video" playsinline preload="metadata" controls>
+                <video class="behind-video" playsinline preload="metadata" controls poster="dj-caliblue-poster.jpg"
+                    style="background: transparent url('dj-caliblue-poster.jpg') 50% 50% / cover no-repeat;">
                     <source src="dj-caliblue.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -2191,33 +2518,54 @@
                     <div class="mix-card-image">
                         <span class="mix-number">01</span>
                         <img src="djmix1.png" alt="Texas Hold 'Em Mash-Up by DJ Big Cali" width="329" height="271">
-                        <div class="mix-card-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                        <div class="mix-card-play"><svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg></div>
                     </div>
-                    <div class="mix-card-overlay"><div class="mix-card-title">Texas Hold 'Em Mash-Up</div><div class="mix-card-meta">DJ Big Cali</div></div>
+                    <div class="mix-card-overlay">
+                        <div class="mix-card-title">Texas Hold 'Em Mash-Up</div>
+                        <div class="mix-card-meta">DJ Big Cali</div>
+                    </div>
                 </div>
                 <div class="mix-card gs-reveal">
                     <div class="mix-card-image">
                         <span class="mix-number">02</span>
                         <img src="djmix2.png" alt="Cornerstone Berkley Mix by DJ Big Cali" width="313" height="263">
-                        <div class="mix-card-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                        <div class="mix-card-play"><svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg></div>
                     </div>
-                    <div class="mix-card-overlay"><div class="mix-card-title">Cornerstone Berkley</div><div class="mix-card-meta">DJ Big Cali</div></div>
+                    <div class="mix-card-overlay">
+                        <div class="mix-card-title">Cornerstone Berkley</div>
+                        <div class="mix-card-meta">DJ Big Cali</div>
+                    </div>
                 </div>
                 <div class="mix-card gs-reveal">
                     <div class="mix-card-image">
                         <span class="mix-number">03</span>
-                        <img src="djmix3.png" alt="Reason Off the Porch Tour Mix by DJ Big Cali" width="329" height="271">
-                        <div class="mix-card-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                        <img src="djmix3.png" alt="Reason Off the Porch Tour Mix by DJ Big Cali" width="329"
+                            height="271">
+                        <div class="mix-card-play"><svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg></div>
                     </div>
-                    <div class="mix-card-overlay"><div class="mix-card-title">Reason Off the Porch Tour</div><div class="mix-card-meta">DJ Big Cali</div></div>
+                    <div class="mix-card-overlay">
+                        <div class="mix-card-title">Reason Off the Porch Tour</div>
+                        <div class="mix-card-meta">DJ Big Cali</div>
+                    </div>
                 </div>
                 <div class="mix-card gs-reveal">
                     <div class="mix-card-image">
                         <span class="mix-number">04</span>
                         <img src="djmix4.png" alt="Can We Talk Mash Up by DJ Big Cali" width="326" height="282">
-                        <div class="mix-card-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+                        <div class="mix-card-play"><svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg></div>
                     </div>
-                    <div class="mix-card-overlay"><div class="mix-card-title">Can We Talk Mash Up</div><div class="mix-card-meta">DJ Big Cali</div></div>
+                    <div class="mix-card-overlay">
+                        <div class="mix-card-title">Can We Talk Mash Up</div>
+                        <div class="mix-card-meta">DJ Big Cali</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2229,43 +2577,80 @@
                     <div class="bento-grid" id="bentoGrid">
                         <div class="bento-item" data-index="0">
                             <img src="wedding1.png" alt="Bride and groom sharing their first dance">
-                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
                         </div>
                         <div class="bento-item" data-index="1">
                             <img src="wedding2.png" alt="Wedding reception guests celebrating on the dance floor">
-                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
                         </div>
                         <div class="bento-item" data-index="2">
-                            <img src="wedding3.png" alt="DJ Big Cali performing at an elegant wedding venue" loading="lazy">
-                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                            <img src="wedding3.png" alt="DJ Big Cali performing at an elegant wedding venue"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
                         </div>
                         <div class="bento-item" data-index="3">
-                            <img src="wedding4.png" alt="Wedding couple surrounded by guests during reception" loading="lazy">
-                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                            <img src="wedding4.png" alt="Wedding couple surrounded by guests during reception"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
                         </div>
                         <div class="bento-item" data-index="4">
-                            <img src="wedding5.png" alt="Colorful wedding dance floor lit by professional lighting" loading="lazy">
-                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                            <img src="wedding5.png" alt="Colorful wedding dance floor lit by professional lighting"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
                         </div>
                         <div class="bento-item" data-index="5">
-                            <img src="wedding6.png" alt="Happy wedding party celebrating with DJ Big Cali" loading="lazy">
-                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                            <img src="wedding6.png" alt="Happy wedding party celebrating with DJ Big Cali"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
                         </div>
                         <div class="bento-item" data-index="6">
-                            <img src="wedding7.png" alt="Bride dancing joyfully at her wedding reception" loading="lazy">
-                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                            <img src="wedding7.png" alt="Bride dancing joyfully at her wedding reception"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
                         </div>
                         <div class="bento-item" data-index="7">
                             <img src="wedding8.png" alt="Guests enjoying music and dancing at a wedding" loading="lazy">
-                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
                         </div>
                         <div class="bento-item" data-index="8">
-                            <img src="wedding9.png" alt="Romantic wedding moment captured during the celebration" loading="lazy">
-                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                            <img src="wedding9.png" alt="Romantic wedding moment captured during the celebration"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
                         </div>
                         <div class="bento-item" data-index="9">
-                            <img src="wedding10.png" alt="Full dance floor energy at a DJ Big Cali wedding" loading="lazy">
-                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></div>
+                            <img src="wedding10.png" alt="Full dance floor energy at a DJ Big Cali wedding"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
                         </div>
                     </div>
                 </div>
@@ -2292,7 +2677,9 @@
             <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">&#x2715;</button>
             <button class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#8249;</button>
             <div class="lightbox-img-wrap">
-                <img class="lightbox-img" id="lightboxImg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Wedding photo">
+                <img class="lightbox-img" id="lightboxImg"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    alt="Wedding photo">
             </div>
             <button class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Next image">&#8250;</button>
             <div class="lightbox-counter" id="lightboxCounter" aria-live="polite" aria-atomic="true">1 / 10</div>
@@ -2304,16 +2691,8 @@
 
                 <!-- Video — no text overlay -->
                 <div class="reception-video-wrap gs-reveal" id="receptionVideoWrap">
-                    <video
-                        id="receptionVideo"
-                        autoplay
-                        loop
-                        muted
-                        playsinline
-                        preload="auto"
-                        poster="wedding1.png"
-                        aria-label="DJ Big Cali wedding reception video — couples dancing on the dance floor"
-                    >
+                    <video id="receptionVideo" autoplay loop muted playsinline preload="auto" poster="wedding1.png"
+                        aria-label="DJ Big Cali wedding reception video — couples dancing on the dance floor">
                         <source src="dj-caliwedding.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -2330,40 +2709,46 @@
 
                         <!-- Card 1: Lighting & Special Effects -->
                         <div class="service-card" role="button" tabindex="0"
-                             aria-label="Lighting & Special Effects — hover to see details">
+                            aria-label="Lighting & Special Effects — hover to see details">
                             <div class="service-card-img-wrap">
-                                <img class="lighting-img-base" src="dj-lighting-effects.png" alt="Lighting and special effects setup" loading="lazy">
+                                <img class="lighting-img-base" src="dj-lighting-effects.png"
+                                    alt="Lighting and special effects setup" loading="lazy">
                             </div>
                             <div class="service-card-label">Lighting &amp; Special Effects</div>
                             <div class="service-card-overlay" aria-hidden="true">
                                 <h4>Lighting &amp; Special Effects</h4>
-                                <p>Uplighting, spotlights, sparklers, dancing on the clouds and more to transform the venue into a magical and elevated atmosphere for any event.</p>
+                                <p>Uplighting, spotlights, sparklers, dancing on the clouds and more to transform the
+                                    venue into a magical and elevated atmosphere for any event.</p>
                             </div>
                         </div>
 
                         <!-- Card 2: MC Services -->
                         <div class="service-card" role="button" tabindex="0"
-                             aria-label="MC Services — hover to see details">
+                            aria-label="MC Services — hover to see details">
                             <div class="service-card-img-wrap">
                                 <img src="dj-mc.png" alt="DJ and MC services at live event" loading="lazy">
                             </div>
                             <div class="service-card-label">MC Services</div>
                             <div class="service-card-overlay" aria-hidden="true">
                                 <h4>MC Services</h4>
-                                <p>DJ/MC services provide professional entertainment and hosting for a seamless and memorable experience for guests, ensuring the event runs smoothly and everyone has a great time.</p>
+                                <p>DJ/MC services provide professional entertainment and hosting for a seamless and
+                                    memorable experience for guests, ensuring the event runs smoothly and everyone has a
+                                    great time.</p>
                             </div>
                         </div>
 
                         <!-- Card 3: PhotoBooth -->
                         <div class="service-card" role="button" tabindex="0"
-                             aria-label="PhotoBooth — hover to see details">
+                            aria-label="PhotoBooth — hover to see details">
                             <div class="service-card-img-wrap">
                                 <img src="photobooth.png" alt="Photo booth setup at event" loading="lazy">
                             </div>
                             <div class="service-card-label">PhotoBooth</div>
                             <div class="service-card-overlay" aria-hidden="true">
                                 <h4>PhotoBooth</h4>
-                                <p>Photo booths add an element of fun and excitement to any event, creating lasting memories for guests while providing hosts with a unique way to document their special occasions.</p>
+                                <p>Photo booths add an element of fun and excitement to any event, creating lasting
+                                    memories for guests while providing hosts with a unique way to document their
+                                    special occasions.</p>
                             </div>
                         </div>
 
@@ -2412,11 +2797,14 @@
                     </div>
                     <div class="booking-form-group">
                         <label for="cta-booking-message">Details</label>
-                        <textarea id="cta-booking-message" name="message" rows="3" placeholder="Tell us about your event..."></textarea>
+                        <textarea id="cta-booking-message" name="message" rows="3"
+                            placeholder="Tell us about your event..."></textarea>
                     </div>
                     <button type="submit" class="booking-form-submit">
                         <span>Send Inquiry</span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                        </svg>
                     </button>
                     <p class="booking-form-note">We typically respond within 24 hours</p>
                 </form>
@@ -2427,7 +2815,8 @@
             <div class="subscribe-inner">
                 <h2 class="section-heading gs-reveal">SUBSCRIBE</h2>
                 <p class="section-text gs-reveal">Sign up with your email address to receive news and updates.</p>
-                <form class="subscribe-form gs-reveal" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:var(--accent);font-family:Oswald;letter-spacing:3px;padding:14px;\'>THANK YOU!</p>';">
+                <form class="subscribe-form gs-reveal"
+                    onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:var(--accent);font-family:Oswald;letter-spacing:3px;padding:14px;\'>THANK YOU!</p>';">
                     <input type="email" placeholder="Email Address" required>
                     <button type="submit">Sign Up</button>
                 </form>
@@ -2438,13 +2827,26 @@
             <div class="footer-inner">
                 <div class="footer-logo"><img src="DJ-logo2.png" alt="DJ Big Cali" class="footer-logo-img"></div>
                 <div class="footer-socials">
-                    <a href="https://www.instagram.com/djbigcali" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-                    <a href="https://www.tiktok.com/@djbigcali" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.75a8.23 8.23 0 004.76 1.52V6.84a4.87 4.87 0 01-1-.15z"/></svg></a>
-                    <a href="mailto:BIGCALI@DJBIGCALI.COM" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+                    <a href="https://www.instagram.com/djbigcali" target="_blank" rel="noopener"
+                        aria-label="Instagram"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                        </svg></a>
+                    <a href="https://www.tiktok.com/@djbigcali" target="_blank" rel="noopener" aria-label="TikTok"><svg
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.75a8.23 8.23 0 004.76 1.52V6.84a4.87 4.87 0 01-1-.15z" />
+                        </svg></a>
+                    <a href="mailto:BIGCALI@DJBIGCALI.COM" aria-label="Email"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg></a>
                 </div>
                 <a href="mailto:BIGCALI@DJBIGCALI.COM" class="footer-email">BIGCALI@DJBIGCALI.COM</a>
             </div>
-            <div class="footer-bottom"><p>&copy; 2025 DJ Big Cali. All Rights Reserved.</p></div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DJ Big Cali. All Rights Reserved.</p>
+            </div>
         </footer>
 
     </div>
@@ -2605,23 +3007,24 @@
                         document.body.classList.remove('intro-active');
                         lenis.start();
                         gsap.to(header, { opacity: 1, duration: 0.8, ease: 'power2.out' });
+                        forceHeroVideoPlay();
                         startHeroAnimations();
                         ScrollTrigger.refresh();
                     }
                 })
-                .to(scrollPrompt, { opacity: 0, duration: 0.2, ease: 'power2.in' })
-                .to(glow, { opacity: 0, scale: 1.5, duration: 0.5, ease: 'power2.in' }, '<')
-                .to([logoLeft, logoRight], {
-                    filter: 'drop-shadow(0 0 0px rgba(201,168,76,0))',
-                    duration: 0.3
-                }, '<')
-                .to(logoLeft, { yPercent: -120, opacity: 0, duration: 0.6, ease: 'power3.in' }, '-=0.2')
-                .to(logoRight, { yPercent: 120, opacity: 0, duration: 0.6, ease: 'power3.in' }, '<')
-                .to(introEl, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, '-=0.2');
+                    .to(scrollPrompt, { opacity: 0, duration: 0.2, ease: 'power2.in' })
+                    .to(glow, { opacity: 0, scale: 1.5, duration: 0.5, ease: 'power2.in' }, '<')
+                    .to([logoLeft, logoRight], {
+                        filter: 'drop-shadow(0 0 0px rgba(201,168,76,0))',
+                        duration: 0.3
+                    }, '<')
+                    .to(logoLeft, { yPercent: -120, opacity: 0, duration: 0.6, ease: 'power3.in' }, '-=0.2')
+                    .to(logoRight, { yPercent: 120, opacity: 0, duration: 0.6, ease: 'power3.in' }, '<')
+                    .to(introEl, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, '-=0.2');
             }
 
             // ---- Asset-ready detection ----
-            const video = document.getElementById('bgVideo');
+            const video = document.querySelector('.hero-bg-video');
             const isMobile = /Mobi|Android/i.test(navigator.userAgent);
             const readyThreshold = isMobile ? 2 : 3; // HAVE_CURRENT_DATA vs HAVE_FUTURE_DATA
             let introTimer = false;
@@ -2713,27 +3116,51 @@
         })();
 
         // ================================================================
-        // iOS Safari autoplay fallback for hero background video
+        // HERO VIDEO — iOS BULLETPROOF AUTOPLAY
         // ================================================================
-        (function iosAutoplayFix() {
-            const bgVideo = document.getElementById('bgVideo');
-            if (!bgVideo) return;
+        function forceHeroVideoPlay() {
+            const heroVideo = document.querySelector('.hero-bg-video');
+            if (!heroVideo) return;
 
-            // Attempt autoplay on window load
-            window.addEventListener('load', () => {
-                if (bgVideo.paused) {
-                    bgVideo.play().catch(() => {});
-                }
-            });
+            // Ensure attributes are set (belt AND suspenders)
+            heroVideo.muted = true;
+            heroVideo.playsInline = true;
+            heroVideo.setAttribute('playsinline', '');
+            heroVideo.setAttribute('muted', '');
+            heroVideo.loop = true;
 
-            // Fallback: first touch triggers play (iOS may block autoplay until interaction)
-            document.addEventListener('touchstart', function iosTouchFix() {
-                if (bgVideo.paused) {
-                    bgVideo.play().catch(() => {});
-                }
-                document.removeEventListener('touchstart', iosTouchFix);
-            }, { once: true });
-        })();
+            // Remove poster if somehow present
+            heroVideo.removeAttribute('poster');
+
+            // Attempt play
+            const playPromise = heroVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // If autoplay blocked, try again after a tiny delay
+                    setTimeout(() => {
+                        heroVideo.play().catch(() => { });
+                    }, 100);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            forceHeroVideoPlay();
+        });
+
+        // iOS last resort — first touch triggers play
+        ['touchstart', 'click'].forEach(event => {
+            document.addEventListener(event, function iosForcePlay() {
+                forceHeroVideoPlay();
+                document.removeEventListener(event, iosForcePlay);
+            }, { once: true, passive: true });
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                forceHeroVideoPlay();
+            }
+        });
 
         // ================================================================
         // AGENT 2 + 6: HERO ANIMATIONS + PARALLAX
@@ -2743,21 +3170,21 @@
             tl.fromTo('.hero-subtitle',
                 { opacity: 0, y: 30, visibility: 'hidden' },
                 { opacity: 1, y: 0, visibility: 'visible', duration: 1, ease: 'power3.out' })
-              .fromTo('.hero-title span:nth-child(1)',
-                { opacity: 0, y: 80, visibility: 'hidden' },
-                { opacity: 1, y: 0, visibility: 'visible', duration: 0.9, ease: 'expo.out' }, '-=0.6')
-              .fromTo('.hero-title span:nth-child(2)',
-                { opacity: 0, y: 80, visibility: 'hidden' },
-                { opacity: 1, y: 0, visibility: 'visible', duration: 0.9, ease: 'expo.out' }, '-=0.7')
-              .fromTo('.hero-title span:nth-child(3)',
-                { opacity: 0, y: 80, visibility: 'hidden' },
-                { opacity: 1, y: 0, visibility: 'visible', duration: 0.9, ease: 'expo.out' }, '-=0.7')
-              .fromTo('.hero-tagline',
-                { opacity: 0, y: 20, visibility: 'hidden' },
-                { opacity: 1, y: 0, visibility: 'visible', duration: 1, ease: 'power3.out' }, '-=0.4')
-              .fromTo('.scroll-indicator',
-                { opacity: 0, visibility: 'hidden' },
-                { opacity: 1, visibility: 'visible', duration: 1, ease: 'power2.out' }, '-=0.5');
+                .fromTo('.hero-title span:nth-child(1)',
+                    { opacity: 0, y: 80, visibility: 'hidden' },
+                    { opacity: 1, y: 0, visibility: 'visible', duration: 0.9, ease: 'expo.out' }, '-=0.6')
+                .fromTo('.hero-title span:nth-child(2)',
+                    { opacity: 0, y: 80, visibility: 'hidden' },
+                    { opacity: 1, y: 0, visibility: 'visible', duration: 0.9, ease: 'expo.out' }, '-=0.7')
+                .fromTo('.hero-title span:nth-child(3)',
+                    { opacity: 0, y: 80, visibility: 'hidden' },
+                    { opacity: 1, y: 0, visibility: 'visible', duration: 0.9, ease: 'expo.out' }, '-=0.7')
+                .fromTo('.hero-tagline',
+                    { opacity: 0, y: 20, visibility: 'hidden' },
+                    { opacity: 1, y: 0, visibility: 'visible', duration: 1, ease: 'power3.out' }, '-=0.4')
+                .fromTo('.scroll-indicator',
+                    { opacity: 0, visibility: 'hidden' },
+                    { opacity: 1, visibility: 'visible', duration: 1, ease: 'power2.out' }, '-=0.5');
         }
 
         // Hero content parallax (scrub with Lenis)
@@ -2792,10 +3219,10 @@
             if (video.paused) { video.play(); overlay.classList.add('hidden'); }
             else { video.pause(); overlay.classList.remove('hidden'); }
         }
-        document.getElementById('featuredVideo').addEventListener('click', function() {
+        document.getElementById('featuredVideo').addEventListener('click', function () {
             if (!this.paused) { this.pause(); document.getElementById('videoOverlay').classList.remove('hidden'); }
         });
-        document.getElementById('featuredVideo').addEventListener('ended', function() {
+        document.getElementById('featuredVideo').addEventListener('ended', function () {
             document.getElementById('videoOverlay').classList.remove('hidden');
         });
 
@@ -3098,19 +3525,19 @@
         // LIGHTBOX
         // ================================================================
         (function initLightbox() {
-            const lightbox    = document.getElementById('lightbox');
-            const lbImg       = document.getElementById('lightboxImg');
-            const lbClose     = document.getElementById('lightboxClose');
-            const lbPrev      = document.getElementById('lightboxPrev');
-            const lbNext      = document.getElementById('lightboxNext');
-            const lbCounter   = document.getElementById('lightboxCounter');
-            const bentoItems  = document.querySelectorAll('.bento-item');
-            const images      = [
-                'wedding1.png','wedding2.png','wedding3.png','wedding4.png','wedding5.png',
-                'wedding6.png','wedding7.png','wedding8.png','wedding9.png','wedding10.png'
+            const lightbox = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightboxImg');
+            const lbClose = document.getElementById('lightboxClose');
+            const lbPrev = document.getElementById('lightboxPrev');
+            const lbNext = document.getElementById('lightboxNext');
+            const lbCounter = document.getElementById('lightboxCounter');
+            const bentoItems = document.querySelectorAll('.bento-item');
+            const images = [
+                'wedding1.png', 'wedding2.png', 'wedding3.png', 'wedding4.png', 'wedding5.png',
+                'wedding6.png', 'wedding7.png', 'wedding8.png', 'wedding9.png', 'wedding10.png'
             ];
-            let currentIndex  = 0;
-            let touchStartX   = 0;
+            let currentIndex = 0;
+            let touchStartX = 0;
             let focusableEls;
             let prevFocused;
 
@@ -3181,14 +3608,14 @@
             // Keyboard nav + ESC
             document.addEventListener('keydown', (e) => {
                 if (!lightbox.classList.contains('active')) return;
-                if (e.key === 'Escape')      closeLightbox();
-                if (e.key === 'ArrowLeft')   showImage(currentIndex - 1);
-                if (e.key === 'ArrowRight')  showImage(currentIndex + 1);
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+                if (e.key === 'ArrowRight') showImage(currentIndex + 1);
                 // Focus trap
                 if (e.key === 'Tab') {
                     const focusable = Array.from(lightbox.querySelectorAll('button, [tabindex]:not([tabindex="-1"])'));
                     const first = focusable[0];
-                    const last  = focusable[focusable.length - 1];
+                    const last = focusable[focusable.length - 1];
                     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
                     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
                 }
@@ -3200,7 +3627,7 @@
                 const delta = e.changedTouches[0].screenX - touchStartX;
                 if (Math.abs(delta) > 50) {
                     if (delta < 0) showImage(currentIndex + 1);
-                    else            showImage(currentIndex - 1);
+                    else showImage(currentIndex - 1);
                 }
             }, { passive: true });
         })();
@@ -3223,71 +3650,72 @@
             videos.forEach(v => observer.observe(v));
         })();
 
-    // =========================================
-    // BOOKING DROPDOWN — Header
-    // =========================================
-    (function bookingDropdown() {
-        const trigger = document.getElementById('bookingTrigger');
-        const panel = document.getElementById('bookingPanel');
-        const closeBtn = document.getElementById('bookingClose');
+        // =========================================
+        // BOOKING DROPDOWN — Header
+        // =========================================
+        (function bookingDropdown() {
+            const trigger = document.getElementById('bookingTrigger');
+            const panel = document.getElementById('bookingPanel');
+            const closeBtn = document.getElementById('bookingClose');
 
-        if (!trigger || !panel) return;
+            if (!trigger || !panel) return;
 
-        function openBooking() {
-            panel.classList.add('active');
-            trigger.setAttribute('aria-expanded', 'true');
-        }
-
-        function closeBooking() {
-            panel.classList.remove('active');
-            trigger.setAttribute('aria-expanded', 'false');
-        }
-
-        trigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (panel.classList.contains('active')) {
-                closeBooking();
-            } else {
-                openBooking();
+            function openBooking() {
+                panel.classList.add('active');
+                trigger.setAttribute('aria-expanded', 'true');
             }
-        });
 
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeBooking);
-        }
-
-        document.addEventListener('click', (e) => {
-            if (panel.classList.contains('active') && !panel.contains(e.target) && !trigger.contains(e.target)) {
-                closeBooking();
+            function closeBooking() {
+                panel.classList.remove('active');
+                trigger.setAttribute('aria-expanded', 'false');
             }
-        });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && panel.classList.contains('active')) {
-                closeBooking();
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (panel.classList.contains('active')) {
+                    closeBooking();
+                } else {
+                    openBooking();
+                }
+            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeBooking);
             }
-        });
-    })();
 
-    // =========================================
-    // BOOKING FORMS — Submission Handler
-    // =========================================
-    document.querySelectorAll('.booking-form').forEach(form => {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = form.querySelector('.booking-form-submit');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<span>Sent!</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
-            btn.style.pointerEvents = 'none';
+            document.addEventListener('click', (e) => {
+                if (panel.classList.contains('active') && !panel.contains(e.target) && !trigger.contains(e.target)) {
+                    closeBooking();
+                }
+            });
 
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.style.pointerEvents = '';
-                form.reset();
-            }, 3000);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && panel.classList.contains('active')) {
+                    closeBooking();
+                }
+            });
+        })();
+
+        // =========================================
+        // BOOKING FORMS — Submission Handler
+        // =========================================
+        document.querySelectorAll('.booking-form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('.booking-form-submit');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span>Sent!</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+                btn.style.pointerEvents = 'none';
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.pointerEvents = '';
+                    form.reset();
+                }, 3000);
+            });
         });
-    });
 
     </script>
 </body>
+
 </html>
