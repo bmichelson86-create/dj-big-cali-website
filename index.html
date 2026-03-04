@@ -1,0 +1,3745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Big Cali | Official Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Preload iOS video posters to prevent grey box flash -->
+    <link rel="preload" href="big-cali-turntable-poster.jpg" as="image">
+    <link rel="preload" href="dj-caligreen-poster.jpg" as="image">
+    <link rel="preload" href="dj-caliblue-poster.jpg" as="image">
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --dark: #111111;
+            --dark-gray: #1a1a1a;
+            --mid-gray: #2a2a2a;
+            --light-gray: #888888;
+            --off-white: #e8e8e8;
+            --white: #ffffff;
+            --accent: #c9a84c;
+            --accent-dim: #8a7333;
+            --red-accent: #d4243b;
+        }
+
+        /* ===== LENIS CSS (from docs) ===== */
+        html.lenis,
+        html.lenis body {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body.intro-active {
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ===== LOGO INTRO OVERLAY ===== */
+        .logo-intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--black);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo-intro.hidden {
+            pointer-events: none;
+        }
+
+        .logo-intro-inner {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .intro-logo {
+            max-height: 440px;
+            width: auto;
+            opacity: 0;
+            will-change: transform, opacity;
+            filter: drop-shadow(0 0 40px rgba(201, 168, 76, 0));
+        }
+
+        .intro-logo-left {
+            transform: translateY(-120vh);
+        }
+
+        .intro-logo-right {
+            transform: translateY(120vh);
+        }
+
+        .intro-scroll-prompt {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+        }
+
+        .intro-scroll-prompt p {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .intro-scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        .intro-glow {
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.12) 0%, rgba(201, 168, 76, 0.04) 40%, transparent 70%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Particle-like accent lines */
+        .intro-line {
+            position: absolute;
+            width: 1px;
+            height: 0;
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+            opacity: 0;
+        }
+
+        .intro-line-1 {
+            left: 20%;
+        }
+
+        .intro-line-2 {
+            left: 40%;
+        }
+
+        .intro-line-3 {
+            left: 60%;
+        }
+
+        .intro-line-4 {
+            left: 80%;
+        }
+
+        /* ===== VIDEO BACKGROUND (PARALLAX) ===== */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .video-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .video-bg video {
+            position: absolute;
+            top: -10vh;
+            left: 0;
+            width: 100%;
+            height: 120vh;
+            object-fit: cover;
+            will-change: transform;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== MAIN CONTENT WRAPPER ===== */
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ===== HEADER / NAV ===== */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0 40px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(10, 10, 10, 0.6);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+        }
+
+        .site-header.scrolled {
+            background: rgba(10, 10, 10, 0.92);
+        }
+
+        .site-header.header-hidden {
+            transform: translateY(-100%);
+        }
+
+        .logo {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--off-white);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 10px 28px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent);
+            color: var(--black);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+            opacity: 0;
+        }
+
+        .hero-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            line-height: 0.9;
+            letter-spacing: 6px;
+            color: var(--white);
+            opacity: 0;
+        }
+
+        .hero-title span {
+            display: block;
+        }
+
+        .hero-title .outline-text {
+            -webkit-text-stroke: 2px var(--white);
+            color: transparent;
+        }
+
+        .hero-tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            color: var(--light-gray);
+            margin-top: 30px;
+            text-transform: uppercase;
+            opacity: 0;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+        }
+
+        .scroll-indicator p {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--light-gray);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scaleY(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+
+        /* ===== MARQUEE ===== */
+        .marquee-section {
+            background: var(--accent);
+            padding: 16px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            will-change: transform;
+        }
+
+        .marquee-track span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 6px;
+            color: var(--black);
+            white-space: nowrap;
+            padding: 0 60px;
+        }
+
+        /* ===== SECTION DEFAULTS ===== */
+        section {
+            position: relative;
+            padding: 120px 60px;
+        }
+
+        .section-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 6px;
+            color: var(--accent-dim);
+            margin-bottom: 12px;
+        }
+
+        .section-heading {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1;
+            letter-spacing: 3px;
+            margin-bottom: 24px;
+        }
+
+        .section-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--light-gray);
+            max-width: 540px;
+        }
+
+        /* ===== PHOTO GALLERY SECTION ===== */
+        .gallery {
+            background: var(--dark);
+            padding: 140px 60px;
+            overflow: hidden;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            will-change: transform;
+            transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-item:hover img {
+            filter: brightness(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.6) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .gallery-item-label {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            z-index: 2;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-item:hover .gallery-item-label {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about {
+            background: var(--dark);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--accent-dim);
+            z-index: 0;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .about-image {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            will-change: transform;
+        }
+
+        .about-content .section-text {
+            margin-bottom: 30px;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--light-gray);
+            margin-top: 4px;
+        }
+
+        /* ===== FEATURED VIDEO SECTION ===== */
+        .featured-video {
+            background: var(--black);
+            padding: 140px 60px;
+            overflow: hidden;
+        }
+
+        .featured-video-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .featured-video-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .featured-video-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            right: -12px;
+            bottom: -12px;
+            border: 1px solid var(--accent-dim);
+            pointer-events: none;
+            opacity: 0.5;
+            transition: opacity 0.6s ease;
+        }
+
+        .featured-video-wrapper:hover::before {
+            opacity: 1;
+        }
+
+        .featured-video-player {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--dark-gray);
+            overflow: hidden;
+        }
+
+        .featured-video-player video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: background 0.4s ease, opacity 0.4s ease;
+            z-index: 2;
+        }
+
+        .video-play-overlay:hover {
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .video-play-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .video-play-btn {
+            width: 90px;
+            height: 90px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .video-play-overlay:hover .video-play-btn {
+            transform: scale(1.15);
+            background: rgba(201, 168, 76, 0.15);
+            box-shadow: 0 0 40px rgba(201, 168, 76, 0.2);
+        }
+
+        .video-play-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--accent);
+            margin-left: 4px;
+        }
+
+        .featured-video-caption {
+            text-align: center;
+            margin-top: 24px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--light-gray);
+        }
+
+        /* ===== MIXES SECTION ===== */
+        .mixes {
+            background: var(--black);
+        }
+
+        .mixes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+        }
+
+        .mixes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .mix-card {
+            position: relative;
+            background: var(--dark-gray);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .mix-card-image {
+            width: 100%;
+            height: 320px;
+            background: var(--mid-gray);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mix-card:hover .mix-card-image {
+            transform: scale(1.05);
+        }
+
+        .mix-card-image .mix-number {
+            position: absolute;
+            top: 16px;
+            left: 20px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.08);
+            line-height: 1;
+        }
+
+        .mix-card-image .placeholder-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: var(--accent-dim);
+            opacity: 0.4;
+        }
+
+        .mix-card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px 20px 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+        }
+
+        .mix-card-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .mix-card-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: var(--light-gray);
+            letter-spacing: 1px;
+        }
+
+        .mix-card-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .mix-card:hover .mix-card-play {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .mix-card-play svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--accent);
+            margin-left: 3px;
+        }
+
+        .mix-card-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ===== BEHIND VIDEOS ===== */
+        .behind-videos-container {
+            display: flex;
+            gap: 24px;
+            max-width: 1200px;
+            margin: 60px auto 0;
+        }
+
+        .behind-video {
+            flex: 1;
+            min-width: 0;
+            border-radius: 4px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            background: var(--dark-gray);
+            display: block;
+            width: 100%;
+        }
+
+        /* ===== WEDDINGS / EVENTS SECTION ===== */
+        .events {
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .events-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .events-visual {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Parallax background layer — sits behind the bento grid */
+        .bento-bg {
+            position: absolute;
+            inset: -80px;
+            /* overscan so movement never shows a gap */
+            background:
+                radial-gradient(ellipse 90% 65% at 50% 65%, rgba(201, 168, 76, 0.09) 0%, rgba(201, 168, 76, 0.03) 45%, transparent 70%),
+                radial-gradient(ellipse 55% 35% at 15% 15%, rgba(255, 255, 255, 0.012) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .bento-grid {
+            position: relative;
+            z-index: 1;
+        }
+
+        .events-content {
+            padding: 40px 0;
+        }
+
+        /* ===== BENTO GALLERY GRID ===== */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: auto;
+            gap: 12px;
+        }
+
+        /* Span assignments for organic layout */
+        .bento-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .bento-item:nth-child(2) {
+            grid-column: span 3;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(3) {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(4) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(5) {
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+
+        .bento-item:nth-child(6) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(7) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(8) {
+            grid-column: span 3;
+            grid-row: span 2;
+        }
+
+        .bento-item:nth-child(9) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .bento-item:nth-child(10) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .bento-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            cursor: pointer;
+            background: var(--mid-gray);
+            min-height: 160px;
+        }
+
+        .bento-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bento-item:hover img {
+            transform: scale(1.05);
+            will-change: transform;
+        }
+
+        .bento-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .bento-item:hover::after {
+            opacity: 1;
+        }
+
+        .bento-item .bento-zoom-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2;
+            width: 44px;
+            height: 44px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bento-item:hover .bento-zoom-icon {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .bento-zoom-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--accent);
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .lightbox-img-wrap {
+            position: relative;
+            max-width: 90vw;
+            max-height: 88vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .lightbox-img.fade-out {
+            opacity: 0;
+            transform: scale(0.97);
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 24px;
+            right: 28px;
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: var(--off-white);
+            font-size: 1.4rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 9001;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .lightbox-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--off-white);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 9001;
+            font-size: 1.2rem;
+        }
+
+        .lightbox-arrow:hover {
+            background: rgba(201, 168, 76, 0.15);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .lightbox-counter {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            color: rgba(255, 255, 255, 0.5);
+            z-index: 9001;
+            pointer-events: none;
+        }
+
+        .events-list {
+            list-style: none;
+            margin-top: 40px;
+        }
+
+        .events-list li {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: var(--off-white);
+            transition: color 0.3s ease, padding-left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .events-list li:hover {
+            color: var(--accent);
+            padding-left: 8px;
+        }
+
+        .events-list li .event-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .events-list li:hover .event-dot {
+            transform: scale(1.5);
+        }
+
+        /* ===== BOOKING CTA ===== */
+        .booking-cta {
+            background: var(--black);
+            text-align: center;
+            padding: 160px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-cta-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 25vw;
+            color: rgba(255, 255, 255, 0.02);
+            white-space: nowrap;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .booking-cta .section-heading {
+            font-size: clamp(3rem, 8vw, 7rem);
+            margin-bottom: 16px;
+        }
+
+        .booking-cta .section-text {
+            max-width: 500px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .cta-button {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            padding: 18px 60px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: var(--accent);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 168, 76, 0.25);
+        }
+
+        /* ===== SUBSCRIBE SECTION ===== */
+        .subscribe {
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 60px;
+        }
+
+        .subscribe-inner {
+            max-width: 600px;
+        }
+
+        .subscribe .section-heading {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        .subscribe .section-text {
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 0;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .subscribe-form input {
+            flex: 1;
+            padding: 14px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: none;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .subscribe-form input::placeholder {
+            color: var(--light-gray);
+            letter-spacing: 1px;
+        }
+
+        .subscribe-form input:focus {
+            border-color: var(--accent);
+        }
+
+        .subscribe-form button {
+            padding: 14px 30px;
+            border: 1px solid var(--accent);
+            background: var(--accent);
+            color: var(--black);
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .subscribe-form button:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+
+        /* ===== FOOTER ===== */
+        .site-footer {
+            background: var(--black);
+            padding: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo-img {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-socials a {
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .footer-socials a:hover {
+            border-color: var(--accent);
+            background: rgba(201, 168, 76, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .footer-socials a svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--off-white);
+            transition: fill 0.3s ease;
+        }
+
+        .footer-socials a:hover svg {
+            fill: var(--accent);
+        }
+
+        .footer-email {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: var(--light-gray);
+            transition: color 0.3s ease;
+        }
+
+        .footer-email:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .footer-bottom p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.25);
+            text-transform: uppercase;
+        }
+
+        /* =========================================
+           BOOKING FORM — Shared Styles
+           ========================================= */
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .booking-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .booking-form-group label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+        }
+
+        .booking-form-group input,
+        .booking-form-group select,
+        .booking-form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease, background 0.3s ease;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .booking-form-group input:focus,
+        .booking-form-group select:focus,
+        .booking-form-group textarea:focus {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .booking-form-group input::placeholder,
+        .booking-form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .booking-form-group select {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+            cursor: pointer;
+        }
+
+        .booking-form-group select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .booking-form-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            padding: 0.85rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            margin-top: 0.5rem;
+        }
+
+        .booking-form-submit:hover {
+            filter: brightness(1.15);
+            transform: translateY(-1px);
+        }
+
+        .booking-form-note {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: center;
+            margin-top: 0.25rem;
+        }
+
+        /* =========================================
+           HEADER BOOKING DROPDOWN
+           ========================================= */
+        .booking-dropdown {
+            position: relative;
+        }
+
+        .booking-dropdown-panel {
+            position: absolute;
+            top: calc(100% + 0.75rem);
+            right: 0;
+            width: 380px;
+            max-height: 85vh;
+            overflow-y: auto;
+            background: var(--dark);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+
+        .booking-dropdown-panel.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .booking-dropdown-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .booking-dropdown-header h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .booking-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .booking-close:hover {
+            color: #fff;
+        }
+
+        /* =========================================
+           CTA SECTION BOOKING FORM
+           ========================================= */
+        .cta-booking-wrapper {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== MOBILE NAV ===== */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.97);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-nav.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mobile-nav-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .mobile-nav-close span {
+            position: absolute;
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: background 0.3s ease;
+        }
+
+        .mobile-nav-close span:first-child {
+            transform: rotate(45deg);
+        }
+
+        .mobile-nav-close span:last-child {
+            transform: rotate(-45deg);
+        }
+
+        .mobile-nav-close:hover span {
+            background: var(--accent);
+        }
+
+        .mobile-nav a {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 6px;
+            color: var(--off-white);
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            section {
+                padding: 80px 40px;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .events-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .gallery {
+                padding: 100px 40px;
+            }
+
+            .featured-video {
+                padding: 100px 40px;
+            }
+
+            .intro-logo {
+                max-height: 320px;
+            }
+
+            .bento-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .bento-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            .bento-item:nth-child(2) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(3) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(4) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(5) {
+                grid-column: span 1;
+                grid-row: span 2;
+            }
+
+            .bento-item:nth-child(6) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(7) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(8) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(9) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(10) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .site-header {
+                padding: 0 24px;
+            }
+
+            .nav-links,
+            .nav-cta,
+            .booking-dropdown {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: flex;
+            }
+
+            section {
+                padding: 60px 24px;
+            }
+
+            .hero-tagline {
+                font-size: 0.8rem;
+                letter-spacing: 3px;
+            }
+
+            .mixes-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .mixes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-row {
+                gap: 30px;
+            }
+
+            .booking-cta {
+                padding: 100px 24px;
+            }
+
+            .subscribe-form {
+                flex-direction: column;
+            }
+
+            .subscribe-form input {
+                border-right: 1px solid rgba(255, 255, 255, 0.15);
+                border-bottom: none;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .about-image {
+                height: 350px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .gallery {
+                padding: 80px 24px;
+            }
+
+            .gallery-item {
+                aspect-ratio: 4/5;
+            }
+
+            .featured-video {
+                padding: 80px 24px;
+            }
+
+            .featured-video-wrapper::before {
+                top: -8px;
+                left: -8px;
+                right: -8px;
+                bottom: -8px;
+            }
+
+            .video-play-btn {
+                width: 70px;
+                height: 70px;
+            }
+
+            .behind-videos-container {
+                flex-direction: column;
+            }
+
+            .intro-logo {
+                max-height: 220px;
+            }
+
+            .intro-glow {
+                width: 400px;
+                height: 400px;
+            }
+
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bento-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(2) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(3) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(4) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(5) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(6) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(7) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(8) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(9) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item:nth-child(10) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .bento-item {
+                min-height: 130px;
+            }
+
+            .lightbox-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+
+            .service-section {
+                padding: 80px 24px;
+            }
+
+            .service-section+.service-section {
+                padding-top: 0;
+            }
+
+            .mc-overlay-text {
+                font-size: 1rem;
+                letter-spacing: 2px;
+            }
+
+            /* ---- Mobile: stack service cards vertically (no horizontal scroll) ---- */
+            .services-scroll-track {
+                flex-direction: column;
+                overflow-x: visible;
+                scroll-snap-type: none;
+                gap: 1.5rem;
+            }
+
+            .service-card {
+                width: 100%;
+                flex: none;
+            }
+
+            .service-card-img-wrap img {
+                height: 220px;
+            }
+        }
+
+        /* ===== SERVICE SECTIONS SHARED ===== */
+        .service-section {
+            background: var(--black);
+            padding: 120px 60px;
+            overflow: hidden;
+            /* contain parallax travel */
+        }
+
+        .service-section+.service-section {
+            padding-top: 0;
+        }
+
+        /* Parallax wrapper — isolates transform from reveal animation on child */
+        .service-parallax-wrap {
+            will-change: transform;
+        }
+
+        .service-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .service-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .service-header .section-number {
+            margin-bottom: 10px;
+        }
+
+        .service-header .section-heading {
+            margin-bottom: 0;
+        }
+
+        /* ===== RECEPTION VIDEO ===== */
+        .reception-video-wrap {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+            background: var(--dark-gray);
+        }
+
+        .reception-video-wrap video {
+            width: 100%;
+            display: block;
+            border-radius: 20px;
+        }
+
+        /* =========================================
+           SERVICES — Heading + Horizontal Scroll
+           ========================================= */
+        .services-header {
+            text-align: center;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .services-scroll-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 1rem 0 2rem;
+        }
+
+        .services-scroll-track {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 0 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) transparent;
+        }
+
+        .services-scroll-track::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .services-scroll-track::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .services-scroll-track::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .service-card {
+            flex: 0 0 auto;
+            width: clamp(280px, 32%, 420px);
+            scroll-snap-align: start;
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            cursor: pointer;
+            background: var(--dark-gray);
+        }
+
+        .service-card-img-wrap {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card-img-wrap img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-card:hover .service-card-img-wrap img,
+        .service-card.overlay-active .service-card-img-wrap img {
+            transform: scale(1.05);
+        }
+
+        .service-card-label {
+            padding: 1rem 1.25rem;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--off-white);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .service-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 16px;
+        }
+
+        .service-card:hover .service-card-overlay,
+        .service-card.overlay-active .service-card-overlay {
+            opacity: 1;
+        }
+
+        .service-card-overlay h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card-overlay p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--off-white);
+            max-width: 300px;
+        }
+
+        /* ===== MC SERVICES ===== */
+        .mc-image-outer {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .mc-image-outer img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 20px;
+        }
+
+        .mc-image-outer:hover img,
+        .mc-image-outer.overlay-active img {
+            transform: scale(1.05);
+        }
+
+        .mc-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 20px;
+        }
+
+        .mc-image-outer:hover .mc-overlay,
+        .mc-image-outer.overlay-active .mc-overlay {
+            opacity: 1;
+        }
+
+        .mc-overlay-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        /* ===== SOUND & LIGHTING ===== */
+        .lighting-image-outer {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .lighting-img-base,
+        .lighting-img-hover {
+            width: 100%;
+            display: block;
+            border-radius: 20px;
+        }
+
+        .lighting-img-hover {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .lighting-image-outer:hover .lighting-img-hover,
+        .lighting-image-outer.overlay-active .lighting-img-hover {
+            opacity: 1;
+        }
+
+        /* ===== GSAP VISIBILITY HELPERS ===== */
+        .gs-reveal {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* ===== FOCUS INDICATORS (WCAG AA) ===== */
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+        }
+
+        .bento-item:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .lightbox-close:focus-visible,
+        .lightbox-arrow:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            background: rgba(201, 168, 76, 0.15);
+            border-color: var(--accent);
+        }
+
+        .mc-image-outer:focus-visible,
+        .lighting-image-outer:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        .nav-links a:focus-visible,
+        .nav-cta:focus-visible,
+        .cta-button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        .subscribe-form input:focus-visible {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* ===== PREFERS-REDUCED-MOTION ===== */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            /* Keep lightbox counter readable — no transition needed */
+            .lightbox-img {
+                transition: none !important;
+            }
+
+            /* Prevent layout flash — make gs-reveal items visible immediately */
+            .gs-reveal {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            .bento-item {
+                opacity: 1 !important;
+            }
+        }
+
+        /* ===== MOBILE SERVICES LAYOUT ===== */
+        @media (max-width: 768px) {
+            .services-scroll-track {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto;
+                overflow-x: hidden;
+                scroll-snap-type: none;
+                padding: 0;
+            }
+
+            .service-card {
+                width: 90%;
+                max-width: 400px;
+            }
+
+            .services-header {
+                text-align: center;
+                padding-left: 0;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="intro-active">
+
+    <!-- ===== LOGO INTRO OVERLAY ===== -->
+    <div class="logo-intro" id="logoIntro">
+        <div class="intro-glow" id="introGlow"></div>
+        <div class="intro-line intro-line-1"></div>
+        <div class="intro-line intro-line-2"></div>
+        <div class="intro-line intro-line-3"></div>
+        <div class="intro-line intro-line-4"></div>
+        <div class="logo-intro-inner">
+            <img src="DJ-logo1.png" alt="DJ Big Cali Logo" class="intro-logo intro-logo-left" id="introLogoLeft">
+            <img src="DJ-logo2.png" alt="DJ Big Cali Logo" class="intro-logo intro-logo-right" id="introLogoRight">
+        </div>
+        <div class="intro-scroll-prompt" id="introScrollPrompt">
+            <p>Scroll to Enter</p>
+            <div class="intro-scroll-line"></div>
+        </div>
+    </div>
+
+    <!-- ===== FIXED VIDEO BACKGROUND ===== -->
+    <div class="video-bg">
+        <video class="hero-bg-video" autoplay muted playsinline loop preload="auto" aria-hidden="true">
+            <source src="dj-turntable.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- ===== MOBILE NAV OVERLAY ===== -->
+    <nav class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close menu">
+            <span></span><span></span>
+        </button>
+        <a href="#about" onclick="closeMobileNav()">About</a>
+        <a href="#gallery" onclick="closeMobileNav()">Gallery</a>
+        <a href="#mixes" onclick="closeMobileNav()">Mixes</a>
+        <a href="#events" onclick="closeMobileNav()">Weddings</a>
+        <a href="#booking" onclick="closeMobileNav()">Book Now</a>
+    </nav>
+
+    <!-- ===== CONTENT ===== -->
+    <div class="content-wrapper">
+
+        <header class="site-header" id="siteHeader">
+            <div class="logo"><img src="DJ-logo2.png" alt="DJ Big Cali"></div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#mixes">Mixes</a></li>
+                <li><a href="#events">Weddings</a></li>
+            </ul>
+            <div class="booking-dropdown" id="bookingDropdown">
+                <button class="nav-cta booking-trigger" id="bookingTrigger" type="button" aria-expanded="false">Book
+                    Now</button>
+                <div class="booking-dropdown-panel" id="bookingPanel">
+                    <div class="booking-dropdown-header">
+                        <h3>Book DJ Big Cali</h3>
+                        <button class="booking-close" id="bookingClose" type="button" aria-label="Close booking form">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <form class="booking-form" id="header-booking-form" action="#" method="POST">
+                        <div class="booking-form-group">
+                            <label for="header-booking-name">Full Name</label>
+                            <input type="text" id="header-booking-name" name="name" placeholder="Your name" required>
+                        </div>
+                        <div class="booking-form-group">
+                            <label for="header-booking-email">Email</label>
+                            <input type="email" id="header-booking-email" name="email" placeholder="your@email.com"
+                                required>
+                        </div>
+                        <div class="booking-form-group">
+                            <label for="header-booking-phone">Phone</label>
+                            <input type="tel" id="header-booking-phone" name="phone" placeholder="(555) 555-5555">
+                        </div>
+                        <div class="booking-form-group">
+                            <label for="header-booking-event">Event Type</label>
+                            <select id="header-booking-event" name="event_type" required>
+                                <option value="" disabled selected>Select event type</option>
+                                <option value="wedding">Wedding</option>
+                                <option value="corporate">Corporate Event</option>
+                                <option value="private">Private Party</option>
+                                <option value="club">Club / Nightlife</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="booking-form-group">
+                            <label for="header-booking-date">Event Date</label>
+                            <input type="date" id="header-booking-date" name="event_date" required>
+                        </div>
+                        <div class="booking-form-group">
+                            <label for="header-booking-message">Details</label>
+                            <textarea id="header-booking-message" name="message" rows="3"
+                                placeholder="Tell us about your event..."></textarea>
+                        </div>
+                        <button type="submit" class="booking-form-submit">
+                            <span>Send Inquiry</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                            </svg>
+                        </button>
+                        <p class="booking-form-note">We typically respond within 24 hours</p>
+                    </form>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menuToggle" onclick="toggleMobileNav()">
+                <span></span><span></span><span></span>
+            </div>
+        </header>
+
+        <section class="hero" id="hero">
+            <div class="hero-content">
+                <p class="hero-subtitle gs-reveal">Bay Area Based DJ</p>
+                <h1 class="hero-title">
+                    <span class="gs-reveal">DJ</span>
+                    <span class="outline-text gs-reveal">BIG</span>
+                    <span class="gs-reveal">CALI</span>
+                </h1>
+                <p class="hero-tagline gs-reveal">Now Booking 2026 / 2027</p>
+            </div>
+            <div class="scroll-indicator gs-reveal">
+                <p>Scroll</p>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <div class="marquee-section">
+            <div class="marquee-track" id="marqueeTrack">
+                <span>NOW BOOKING 2026/2027</span><span>&bull;</span>
+                <span>WEDDINGS &bull; EVENTS &bull; CLUBS</span><span>&bull;</span>
+                <span>NOW BOOKING 2026/2027</span><span>&bull;</span>
+                <span>WEDDINGS &bull; EVENTS &bull; CLUBS</span><span>&bull;</span>
+                <span>NOW BOOKING 2026/2027</span><span>&bull;</span>
+                <span>WEDDINGS &bull; EVENTS &bull; CLUBS</span><span>&bull;</span>
+                <span>NOW BOOKING 2026/2027</span><span>&bull;</span>
+                <span>WEDDINGS &bull; EVENTS &bull; CLUBS</span><span>&bull;</span>
+            </div>
+        </div>
+
+        <section class="about" id="about">
+            <div class="about-image-wrapper gs-reveal">
+                <div class="about-image">
+                    <img src="dj1.png" alt="DJ Big Cali" data-parallax-img>
+                </div>
+            </div>
+            <div class="about-content">
+                <p class="section-number gs-reveal">01 &mdash; ABOUT</p>
+                <h2 class="section-heading gs-reveal">THE EXPERIENCE</h2>
+                <p class="section-text gs-reveal">
+                    DJ Big Cali brings high-energy performances to every event across Texas and beyond.
+                    From sold-out club nights to unforgettable weddings, every set is crafted to move the crowd
+                    and create moments that last a lifetime.
+                </p>
+                <p class="section-text gs-reveal">
+                    With a deep knowledge of music spanning hip-hop, R&B, Latin, EDM, and everything in between,
+                    Big Cali reads the room and delivers the perfect soundtrack for any occasion.
+                </p>
+                <div class="stat-row gs-reveal">
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Events</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Years</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">Bay Area</div>
+                        <div class="stat-label">Based</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gallery" id="gallery">
+            <div class="gallery-header">
+                <p class="section-number gs-reveal">02 &mdash; GALLERY</p>
+                <h2 class="section-heading gs-reveal">IN THE SPOTLIGHT</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item gs-reveal">
+                    <img src="dj4.png" alt="DJ Big Cali - Black and white artistic portrait" data-parallax-img>
+                    <div class="gallery-item-label">Artistic Portrait</div>
+                </div>
+                <div class="gallery-item gs-reveal">
+                    <img src="dj2.png" alt="DJ Big Cali with DJ equipment case" data-parallax-img>
+                    <div class="gallery-item-label">On Location</div>
+                </div>
+                <div class="gallery-item gs-reveal">
+                    <img src="dj3.png" alt="DJ Big Cali in floral jacket" data-parallax-img>
+                    <div class="gallery-item-label">The Style</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-video" id="featured-video">
+            <div class="featured-video-header">
+                <p class="section-number gs-reveal">03 &mdash; WATCH</p>
+                <h2 class="section-heading gs-reveal">BEHIND THE<br>TURNTABLES</h2>
+            </div>
+            <div class="featured-video-wrapper gs-reveal">
+                <div class="featured-video-player">
+                    <video id="featuredVideo" playsinline preload="metadata" controls
+                        poster="big-cali-turntable-poster.jpg"
+                        style="background: transparent url('big-cali-turntable-poster.jpg') 50% 50% / cover no-repeat;">
+                        <source src="big-cali-turntable-video.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-play-overlay" id="videoOverlay" onclick="toggleFeaturedVideo()">
+                        <div class="video-play-btn">
+                            <svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <p class="featured-video-caption">DJ Big Cali &mdash; Live Session</p>
+            </div>
+            <div class="behind-videos-container">
+                <video class="behind-video" playsinline preload="metadata" controls poster="dj-caligreen-poster.jpg"
+                    style="background: transparent url('dj-caligreen-poster.jpg') 50% 50% / cover no-repeat;">
+                    <source src="dj-caligreen.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <video class="behind-video" playsinline preload="metadata" controls poster="dj-caliblue-poster.jpg"
+                    style="background: transparent url('dj-caliblue-poster.jpg') 50% 50% / cover no-repeat;">
+                    <source src="dj-caliblue.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <section class="mixes" id="mixes">
+            <div class="mixes-header">
+                <div>
+                    <p class="section-number gs-reveal">04 &mdash; MIXES</p>
+                    <h2 class="section-heading gs-reveal">FEATURED MIXES</h2>
+                </div>
+            </div>
+            <div class="mixes-grid">
+                <div class="mix-card gs-reveal">
+                    <div class="mix-card-image">
+                        <span class="mix-number">01</span>
+                        <img src="djmix1.png" alt="Texas Hold 'Em Mash-Up by DJ Big Cali" width="329" height="271">
+                        <div class="mix-card-play"><svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg></div>
+                    </div>
+                    <div class="mix-card-overlay">
+                        <div class="mix-card-title">Texas Hold 'Em Mash-Up</div>
+                        <div class="mix-card-meta">DJ Big Cali</div>
+                    </div>
+                </div>
+                <div class="mix-card gs-reveal">
+                    <div class="mix-card-image">
+                        <span class="mix-number">02</span>
+                        <img src="djmix2.png" alt="Cornerstone Berkley Mix by DJ Big Cali" width="313" height="263">
+                        <div class="mix-card-play"><svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg></div>
+                    </div>
+                    <div class="mix-card-overlay">
+                        <div class="mix-card-title">Cornerstone Berkley</div>
+                        <div class="mix-card-meta">DJ Big Cali</div>
+                    </div>
+                </div>
+                <div class="mix-card gs-reveal">
+                    <div class="mix-card-image">
+                        <span class="mix-number">03</span>
+                        <img src="djmix3.png" alt="Reason Off the Porch Tour Mix by DJ Big Cali" width="329"
+                            height="271">
+                        <div class="mix-card-play"><svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg></div>
+                    </div>
+                    <div class="mix-card-overlay">
+                        <div class="mix-card-title">Reason Off the Porch Tour</div>
+                        <div class="mix-card-meta">DJ Big Cali</div>
+                    </div>
+                </div>
+                <div class="mix-card gs-reveal">
+                    <div class="mix-card-image">
+                        <span class="mix-number">04</span>
+                        <img src="djmix4.png" alt="Can We Talk Mash Up by DJ Big Cali" width="326" height="282">
+                        <div class="mix-card-play"><svg viewBox="0 0 24 24">
+                                <polygon points="5,3 19,12 5,21" />
+                            </svg></div>
+                    </div>
+                    <div class="mix-card-overlay">
+                        <div class="mix-card-title">Can We Talk Mash Up</div>
+                        <div class="mix-card-meta">DJ Big Cali</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events" id="events">
+            <div class="events-layout">
+                <div class="events-visual">
+                    <div class="bento-bg" id="bentoBg" aria-hidden="true"></div>
+                    <div class="bento-grid" id="bentoGrid">
+                        <div class="bento-item" data-index="0">
+                            <img src="wedding1.png" alt="Bride and groom sharing their first dance">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
+                        </div>
+                        <div class="bento-item" data-index="1">
+                            <img src="wedding2.png" alt="Wedding reception guests celebrating on the dance floor">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
+                        </div>
+                        <div class="bento-item" data-index="2">
+                            <img src="wedding3.png" alt="DJ Big Cali performing at an elegant wedding venue"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
+                        </div>
+                        <div class="bento-item" data-index="3">
+                            <img src="wedding4.png" alt="Wedding couple surrounded by guests during reception"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
+                        </div>
+                        <div class="bento-item" data-index="4">
+                            <img src="wedding5.png" alt="Colorful wedding dance floor lit by professional lighting"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
+                        </div>
+                        <div class="bento-item" data-index="5">
+                            <img src="wedding6.png" alt="Happy wedding party celebrating with DJ Big Cali"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
+                        </div>
+                        <div class="bento-item" data-index="6">
+                            <img src="wedding7.png" alt="Bride dancing joyfully at her wedding reception"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
+                        </div>
+                        <div class="bento-item" data-index="7">
+                            <img src="wedding8.png" alt="Guests enjoying music and dancing at a wedding" loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
+                        </div>
+                        <div class="bento-item" data-index="8">
+                            <img src="wedding9.png" alt="Romantic wedding moment captured during the celebration"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
+                        </div>
+                        <div class="bento-item" data-index="9">
+                            <img src="wedding10.png" alt="Full dance floor energy at a DJ Big Cali wedding"
+                                loading="lazy">
+                            <div class="bento-zoom-icon" aria-hidden="true"><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                                </svg></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="events-content">
+                    <p class="section-number gs-reveal">05 &mdash; WEDDINGS</p>
+                    <h2 class="section-heading gs-reveal">UNFORGETTABLE<br>CELEBRATIONS</h2>
+                    <p class="section-text gs-reveal">
+                        Your wedding deserves a soundtrack as unique as your love story.
+                        DJ Big Cali brings the energy, elegance, and expertise to make your
+                        special day truly unforgettable.
+                    </p>
+                    <ul class="events-list gs-reveal">
+                        <li><span class="event-dot"></span>Reception &amp; Dance Floor</li>
+                        <li><span class="event-dot"></span>MC Services</li>
+                        <li><span class="event-dot"></span>Custom Playlists</li>
+                        <li><span class="event-dot"></span>Sound &amp; Lighting Setup</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== LIGHTBOX ===== -->
+        <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Wedding photo lightbox">
+            <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">&#x2715;</button>
+            <button class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Previous image">&#8249;</button>
+            <div class="lightbox-img-wrap">
+                <img class="lightbox-img" id="lightboxImg"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                    alt="Wedding photo">
+            </div>
+            <button class="lightbox-arrow lightbox-next" id="lightboxNext" aria-label="Next image">&#8250;</button>
+            <div class="lightbox-counter" id="lightboxCounter" aria-live="polite" aria-atomic="true">1 / 10</div>
+        </div>
+
+        <!-- ===== SERVICES SECTION ===== -->
+        <section class="service-section" id="reception">
+            <div class="service-inner">
+
+                <!-- Video — no text overlay -->
+                <div class="reception-video-wrap gs-reveal" id="receptionVideoWrap">
+                    <video id="receptionVideo" autoplay loop muted playsinline preload="auto" poster="wedding1.png"
+                        aria-label="DJ Big Cali wedding reception video — couples dancing on the dance floor">
+                        <source src="dj-caliwedding.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <!-- Services heading -->
+                <div class="services-header gs-reveal">
+                    <h2 class="section-heading">OUR SERVICES</h2>
+                </div>
+
+                <!-- Horizontal scroll cards -->
+                <div class="services-scroll-wrapper gs-reveal">
+                    <div class="services-scroll-track">
+
+                        <!-- Card 1: Lighting & Special Effects -->
+                        <div class="service-card" role="button" tabindex="0"
+                            aria-label="Lighting & Special Effects — hover to see details">
+                            <div class="service-card-img-wrap">
+                                <img class="lighting-img-base" src="dj-lighting-effects.png"
+                                    alt="Lighting and special effects setup" loading="lazy">
+                            </div>
+                            <div class="service-card-label">Lighting &amp; Special Effects</div>
+                            <div class="service-card-overlay" aria-hidden="true">
+                                <h4>Lighting &amp; Special Effects</h4>
+                                <p>Uplighting, spotlights, sparklers, dancing on the clouds and more to transform the
+                                    venue into a magical and elevated atmosphere for any event.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: MC Services -->
+                        <div class="service-card" role="button" tabindex="0"
+                            aria-label="MC Services — hover to see details">
+                            <div class="service-card-img-wrap">
+                                <img src="dj-mc.png" alt="DJ and MC services at live event" loading="lazy">
+                            </div>
+                            <div class="service-card-label">MC Services</div>
+                            <div class="service-card-overlay" aria-hidden="true">
+                                <h4>MC Services</h4>
+                                <p>DJ/MC services provide professional entertainment and hosting for a seamless and
+                                    memorable experience for guests, ensuring the event runs smoothly and everyone has a
+                                    great time.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: PhotoBooth -->
+                        <div class="service-card" role="button" tabindex="0"
+                            aria-label="PhotoBooth — hover to see details">
+                            <div class="service-card-img-wrap">
+                                <img src="photobooth.png" alt="Photo booth setup at event" loading="lazy">
+                            </div>
+                            <div class="service-card-label">PhotoBooth</div>
+                            <div class="service-card-overlay" aria-hidden="true">
+                                <h4>PhotoBooth</h4>
+                                <p>Photo booths add an element of fun and excitement to any event, creating lasting
+                                    memories for guests while providing hosts with a unique way to document their
+                                    special occasions.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="booking-cta" id="booking">
+            <div class="booking-cta-bg-text" id="bookingBgText">BOOK</div>
+            <p class="section-number gs-reveal">06 &mdash; BOOK</p>
+            <h2 class="section-heading gs-reveal">LET'S MAKE IT<br>HAPPEN</h2>
+            <p class="section-text gs-reveal">
+                Ready to elevate your next event? Get in touch to check availability
+                and lock in your date.
+            </p>
+            <div class="cta-booking-wrapper gs-reveal">
+                <form class="booking-form" id="cta-booking-form" action="#" method="POST">
+                    <div class="booking-form-group">
+                        <label for="cta-booking-name">Full Name</label>
+                        <input type="text" id="cta-booking-name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="booking-form-group">
+                        <label for="cta-booking-email">Email</label>
+                        <input type="email" id="cta-booking-email" name="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="booking-form-group">
+                        <label for="cta-booking-phone">Phone</label>
+                        <input type="tel" id="cta-booking-phone" name="phone" placeholder="(555) 555-5555">
+                    </div>
+                    <div class="booking-form-group">
+                        <label for="cta-booking-event">Event Type</label>
+                        <select id="cta-booking-event" name="event_type" required>
+                            <option value="" disabled selected>Select event type</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="corporate">Corporate Event</option>
+                            <option value="private">Private Party</option>
+                            <option value="club">Club / Nightlife</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="booking-form-group">
+                        <label for="cta-booking-date">Event Date</label>
+                        <input type="date" id="cta-booking-date" name="event_date" required>
+                    </div>
+                    <div class="booking-form-group">
+                        <label for="cta-booking-message">Details</label>
+                        <textarea id="cta-booking-message" name="message" rows="3"
+                            placeholder="Tell us about your event..."></textarea>
+                    </div>
+                    <button type="submit" class="booking-form-submit">
+                        <span>Send Inquiry</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                        </svg>
+                    </button>
+                    <p class="booking-form-note">We typically respond within 24 hours</p>
+                </form>
+            </div>
+        </section>
+
+        <section class="subscribe">
+            <div class="subscribe-inner">
+                <h2 class="section-heading gs-reveal">SUBSCRIBE</h2>
+                <p class="section-text gs-reveal">Sign up with your email address to receive news and updates.</p>
+                <form class="subscribe-form gs-reveal"
+                    onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color:var(--accent);font-family:Oswald;letter-spacing:3px;padding:14px;\'>THANK YOU!</p>';">
+                    <input type="email" placeholder="Email Address" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <div class="footer-logo"><img src="DJ-logo2.png" alt="DJ Big Cali" class="footer-logo-img"></div>
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/djbigcali" target="_blank" rel="noopener"
+                        aria-label="Instagram"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                        </svg></a>
+                    <a href="https://www.tiktok.com/@djbigcali" target="_blank" rel="noopener" aria-label="TikTok"><svg
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.75a8.23 8.23 0 004.76 1.52V6.84a4.87 4.87 0 01-1-.15z" />
+                        </svg></a>
+                    <a href="mailto:BIGCALI@DJBIGCALI.COM" aria-label="Email"><svg viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg></a>
+                </div>
+                <a href="mailto:BIGCALI@DJBIGCALI.COM" class="footer-email">BIGCALI@DJBIGCALI.COM</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 DJ Big Cali. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ===== LENIS SMOOTH SCROLL (CDN) ===== -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <!-- ===== GSAP + ScrollTrigger ===== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // matchMedia — handles all desktop-only parallax; auto-reverts on resize / orientation change
+        const mm = gsap.matchMedia();
+
+        // ================================================================
+        // PREFERS-REDUCED-MOTION — check once, honour throughout
+        // ================================================================
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // If user wants reduced motion, collapse all GSAP durations to near-zero
+        // so elements reveal instantly without deferring or skipping ScrollTriggers
+        if (prefersReducedMotion) {
+            gsap.defaults({ duration: 0.001, ease: 'none' });
+        }
+
+        // ================================================================
+        // AGENT 5: LENIS — lerp-based config (matches Lenis demo feel)
+        // ================================================================
+        const lenis = new Lenis({
+            lerp: 0.08,
+            smoothWheel: true,
+            syncTouch: true,
+            touchMultiplier: 1.5,
+            wheelMultiplier: 0.8,
+        });
+
+        lenis.stop();
+
+        // Sync Lenis → GSAP ScrollTrigger (from Lenis docs)
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+
+        // Track scroll velocity for scroll-driven effects
+        let scrollVelocity = 0;
+        lenis.on('scroll', ({ velocity }) => { scrollVelocity = velocity; });
+
+        // ================================================================
+        // AGENT 1: LOGO INTRO ANIMATION
+        // ================================================================
+        (function initLogoIntro() {
+            const introEl = document.getElementById('logoIntro');
+            const logoLeft = document.getElementById('introLogoLeft');
+            const logoRight = document.getElementById('introLogoRight');
+            const scrollPrompt = document.getElementById('introScrollPrompt');
+            const glow = document.getElementById('introGlow');
+            const lines = document.querySelectorAll('.intro-line');
+            const header = document.getElementById('siteHeader');
+            let introComplete = false;
+            let introDismissed = false;
+
+            const introTL = gsap.timeline({
+                delay: 0.3,
+                onComplete: () => { introComplete = true; }
+            });
+
+            introTL
+                // Accent lines rise up
+                .to(lines, {
+                    height: '100vh',
+                    opacity: 0.15,
+                    duration: 1.2,
+                    stagger: 0.1,
+                    ease: 'power2.out'
+                })
+                // Logos fade in
+                .to([logoLeft, logoRight], {
+                    opacity: 1,
+                    duration: 0.4,
+                    ease: 'power2.out'
+                }, '-=0.6')
+                // DJ logo DROPS DOWN from top
+                .to(logoLeft, {
+                    y: 0,
+                    duration: 1.6,
+                    ease: 'expo.out'
+                }, '-=0.2')
+                // BigCali logo RISES UP from bottom simultaneously
+                .to(logoRight, {
+                    y: 0,
+                    duration: 1.6,
+                    ease: 'expo.out'
+                }, '<')
+                // Dramatic impact flash when they meet
+                .to(glow, {
+                    opacity: 1,
+                    scale: 1.8,
+                    duration: 0.4,
+                    ease: 'power4.out'
+                }, '-=0.3')
+                // Logo drop-shadow glow intensifies
+                .to([logoLeft, logoRight], {
+                    filter: 'drop-shadow(0 0 60px rgba(201,168,76,0.6)) drop-shadow(0 0 120px rgba(201,168,76,0.3))',
+                    duration: 0.5,
+                    ease: 'power2.out'
+                }, '<')
+                // Hold dramatic moment — glow pulses
+                .to(glow, {
+                    opacity: 0.6,
+                    scale: 1.2,
+                    duration: 1.0,
+                    ease: 'power2.inOut'
+                })
+                .to(glow, {
+                    opacity: 1,
+                    scale: 1.5,
+                    duration: 1.0,
+                    ease: 'power2.inOut'
+                })
+                // Settle glow
+                .to(glow, {
+                    opacity: 0.4,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: 'power2.inOut'
+                })
+                // Settle logo glow
+                .to([logoLeft, logoRight], {
+                    filter: 'drop-shadow(0 0 40px rgba(201,168,76,0.35))',
+                    duration: 0.6,
+                    ease: 'power2.inOut'
+                }, '<')
+                // Fade lines
+                .to(lines, {
+                    opacity: 0,
+                    duration: 0.6,
+                    ease: 'power2.in'
+                }, '<')
+                // Show scroll prompt
+                .to(scrollPrompt, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                    delay: 0.2
+                });
+
+            function dismissIntro() {
+                if (introDismissed) return;
+                introDismissed = true;
+
+                gsap.timeline({
+                    onComplete: () => {
+                        introEl.classList.add('hidden');
+                        introEl.style.display = 'none';
+                        document.body.classList.remove('intro-active');
+                        lenis.start();
+                        gsap.to(header, { opacity: 1, duration: 0.8, ease: 'power2.out' });
+                        forceHeroVideoPlay();
+                        startHeroAnimations();
+                        ScrollTrigger.refresh();
+                    }
+                })
+                    .to(scrollPrompt, { opacity: 0, duration: 0.2, ease: 'power2.in' })
+                    .to(glow, { opacity: 0, scale: 1.5, duration: 0.5, ease: 'power2.in' }, '<')
+                    .to([logoLeft, logoRight], {
+                        filter: 'drop-shadow(0 0 0px rgba(201,168,76,0))',
+                        duration: 0.3
+                    }, '<')
+                    .to(logoLeft, { yPercent: -120, opacity: 0, duration: 0.6, ease: 'power3.in' }, '-=0.2')
+                    .to(logoRight, { yPercent: 120, opacity: 0, duration: 0.6, ease: 'power3.in' }, '<')
+                    .to(introEl, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, '-=0.2');
+            }
+
+            // ---- Asset-ready detection ----
+            const video = document.querySelector('.hero-bg-video');
+            const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+            const readyThreshold = isMobile ? 2 : 3; // HAVE_CURRENT_DATA vs HAVE_FUTURE_DATA
+            let introTimer = false;
+            let videoReady = video.readyState >= readyThreshold;
+
+            // Loading pulse while waiting for video after animation completes
+            let pulseAnim = null;
+            function startLoadingPulse() {
+                if (pulseAnim || introDismissed) return;
+                pulseAnim = gsap.to([logoLeft, logoRight], {
+                    filter: 'drop-shadow(0 0 60px rgba(201,168,76,0.6))',
+                    duration: 0.8,
+                    ease: 'power1.inOut',
+                    yoyo: true,
+                    repeat: -1
+                });
+            }
+            function stopLoadingPulse() {
+                if (pulseAnim) { pulseAnim.kill(); pulseAnim = null; }
+            }
+
+            function checkDismiss() {
+                if (introTimer && videoReady && !introDismissed) {
+                    stopLoadingPulse();
+                    introComplete = true;
+                    dismissIntro();
+                    cleanup();
+                } else if (introTimer && !videoReady && introComplete) {
+                    // Animation done, timer elapsed, but video still loading — pulse
+                    startLoadingPulse();
+                }
+            }
+
+            // Condition 1: minimum time elapsed
+            setTimeout(() => {
+                introTimer = true;
+                checkDismiss();
+            }, 2500);
+
+            // Condition 2: video ready
+            if (videoReady) {
+                // Already buffered (cached)
+            } else {
+                video.addEventListener('canplaythrough', function onReady() {
+                    videoReady = true;
+                    video.removeEventListener('canplaythrough', onReady);
+                    checkDismiss();
+                });
+                // Also check readyState for mobile where canplaythrough may not fire
+                const readyPoll = setInterval(() => {
+                    if (video.readyState >= readyThreshold) {
+                        videoReady = true;
+                        clearInterval(readyPoll);
+                        checkDismiss();
+                    }
+                }, 200);
+                // Clear poll on dismiss
+                setTimeout(() => clearInterval(readyPoll), 5500);
+            }
+
+            // Failsafe: dismiss at 5s no matter what (poster covers video)
+            setTimeout(() => {
+                if (!introDismissed) {
+                    stopLoadingPulse();
+                    introComplete = true;
+                    dismissIntro();
+                    cleanup();
+                }
+            }, 5000);
+
+            // User interaction can still dismiss early (after animation)
+            function onIntroInteraction() {
+                if (!introDismissed && introComplete) {
+                    stopLoadingPulse();
+                    dismissIntro();
+                    cleanup();
+                }
+            }
+
+            function cleanup() {
+                window.removeEventListener('wheel', onIntroInteraction);
+                window.removeEventListener('touchstart', onIntroInteraction);
+                introEl.removeEventListener('click', onIntroInteraction);
+            }
+
+            window.addEventListener('wheel', onIntroInteraction, { passive: true });
+            window.addEventListener('touchstart', onIntroInteraction, { passive: true });
+            introEl.addEventListener('click', onIntroInteraction);
+        })();
+
+        // ================================================================
+        // HERO VIDEO — iOS BULLETPROOF AUTOPLAY
+        // ================================================================
+        function forceHeroVideoPlay() {
+            const heroVideo = document.querySelector('.hero-bg-video');
+            if (!heroVideo) return;
+
+            // Ensure attributes are set (belt AND suspenders)
+            heroVideo.muted = true;
+            heroVideo.playsInline = true;
+            heroVideo.setAttribute('playsinline', '');
+            heroVideo.setAttribute('muted', '');
+            heroVideo.loop = true;
+
+            // Remove poster if somehow present
+            heroVideo.removeAttribute('poster');
+
+            // Attempt play
+            const playPromise = heroVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // If autoplay blocked, try again after a tiny delay
+                    setTimeout(() => {
+                        heroVideo.play().catch(() => { });
+                    }, 100);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            forceHeroVideoPlay();
+        });
+
+        // iOS last resort — first touch triggers play
+        ['touchstart', 'click'].forEach(event => {
+            document.addEventListener(event, function iosForcePlay() {
+                forceHeroVideoPlay();
+                document.removeEventListener(event, iosForcePlay);
+            }, { once: true, passive: true });
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                forceHeroVideoPlay();
+            }
+        });
+
+        // ================================================================
+        // AGENT 2 + 6: HERO ANIMATIONS + PARALLAX
+        // ================================================================
+        function startHeroAnimations() {
+            const tl = gsap.timeline();
+            tl.fromTo('.hero-subtitle',
+                { opacity: 0, y: 30, visibility: 'hidden' },
+                { opacity: 1, y: 0, visibility: 'visible', duration: 1, ease: 'power3.out' })
+                .fromTo('.hero-title span:nth-child(1)',
+                    { opacity: 0, y: 80, visibility: 'hidden' },
+                    { opacity: 1, y: 0, visibility: 'visible', duration: 0.9, ease: 'expo.out' }, '-=0.6')
+                .fromTo('.hero-title span:nth-child(2)',
+                    { opacity: 0, y: 80, visibility: 'hidden' },
+                    { opacity: 1, y: 0, visibility: 'visible', duration: 0.9, ease: 'expo.out' }, '-=0.7')
+                .fromTo('.hero-title span:nth-child(3)',
+                    { opacity: 0, y: 80, visibility: 'hidden' },
+                    { opacity: 1, y: 0, visibility: 'visible', duration: 0.9, ease: 'expo.out' }, '-=0.7')
+                .fromTo('.hero-tagline',
+                    { opacity: 0, y: 20, visibility: 'hidden' },
+                    { opacity: 1, y: 0, visibility: 'visible', duration: 1, ease: 'power3.out' }, '-=0.4')
+                .fromTo('.scroll-indicator',
+                    { opacity: 0, visibility: 'hidden' },
+                    { opacity: 1, visibility: 'visible', duration: 1, ease: 'power2.out' }, '-=0.5');
+        }
+
+        // Hero content parallax (scrub with Lenis)
+        gsap.to('.hero-content', {
+            yPercent: -60,
+            opacity: 0,
+            ease: 'none',
+            scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.6 }
+        });
+
+        gsap.to('.scroll-indicator', {
+            opacity: 0,
+            ease: 'none',
+            scrollTrigger: { trigger: '.hero', start: '10% top', end: '25% top', scrub: 0.6 }
+        });
+
+        // Video background parallax (animate container, not video, to preserve centering)
+        gsap.to('.video-bg', {
+            yPercent: 15,
+            ease: 'none',
+            scrollTrigger: { trigger: '.content-wrapper', start: 'top top', end: '40% top', scrub: 0.8 }
+        });
+
+        // IMAGE PARALLAX — moved into mm.add() below
+
+        // ================================================================
+        // AGENT 4: FEATURED VIDEO PLAYER
+        // ================================================================
+        function toggleFeaturedVideo() {
+            const video = document.getElementById('featuredVideo');
+            const overlay = document.getElementById('videoOverlay');
+            if (video.paused) { video.play(); overlay.classList.add('hidden'); }
+            else { video.pause(); overlay.classList.remove('hidden'); }
+        }
+        document.getElementById('featuredVideo').addEventListener('click', function () {
+            if (!this.paused) { this.pause(); document.getElementById('videoOverlay').classList.remove('hidden'); }
+        });
+        document.getElementById('featuredVideo').addEventListener('ended', function () {
+            document.getElementById('videoOverlay').classList.remove('hidden');
+        });
+
+        // ===== MOBILE NAV =====
+        function toggleMobileNav() {
+            document.getElementById('menuToggle').classList.toggle('active');
+            document.getElementById('mobileNav').classList.toggle('active');
+        }
+        function closeMobileNav() {
+            document.getElementById('menuToggle').classList.remove('active');
+            document.getElementById('mobileNav').classList.remove('active');
+        }
+
+        // ===== HEADER: scroll direction hide/show =====
+        let lastScrollY = 0;
+        ScrollTrigger.create({
+            start: 'top -100',
+            onUpdate: (self) => {
+                const header = document.getElementById('siteHeader');
+                header.classList.toggle('scrolled', self.progress > 0);
+                const currentY = self.scroll();
+                if (currentY > lastScrollY && currentY > 200) {
+                    header.classList.add('header-hidden');
+                } else {
+                    header.classList.remove('header-hidden');
+                }
+                lastScrollY = currentY;
+            }
+        });
+
+        // ================================================================
+        // AGENT 5: SCROLL-VELOCITY MARQUEE (Lenis-style)
+        // ================================================================
+        (function initMarquee() {
+            const track = document.getElementById('marqueeTrack');
+            const section = document.querySelector('.marquee-section');
+            let xPos = 0;
+            const baseSpeed = 1;
+            let isVisible = false;
+            let trackHalfWidth = track.scrollWidth / 2;
+
+            // Measure width once; update on resize
+            window.addEventListener('resize', () => {
+                trackHalfWidth = track.scrollWidth / 2;
+            });
+
+            // Only animate when on-screen
+            const observer = new IntersectionObserver(
+                ([entry]) => { isVisible = entry.isIntersecting; },
+                { threshold: 0 }
+            );
+            observer.observe(section);
+
+            gsap.ticker.add(() => {
+                if (!isVisible) return;
+                const velocityBoost = Math.abs(scrollVelocity) * 0.3;
+                xPos -= baseSpeed + velocityBoost;
+                if (Math.abs(xPos) >= trackHalfWidth) xPos = 0;
+                gsap.set(track, { x: xPos });
+            });
+        })();
+
+        // ================================================================
+        // AGENT 6: GSAP SCROLL REVEAL ANIMATIONS
+        // ================================================================
+        function createReveal(elements, fromVars, duration) {
+            elements.forEach((el, i) => {
+                gsap.fromTo(el,
+                    { opacity: 0, visibility: 'hidden', ...fromVars },
+                    {
+                        opacity: 1, visibility: 'visible', y: 0, x: 0,
+                        duration: duration || 1.2,
+                        ease: 'expo.out',
+                        scrollTrigger: {
+                            trigger: el,
+                            start: 'top 88%',
+                            toggleActions: 'play none none none'
+                        }
+                    }
+                );
+            });
+        }
+
+        createReveal(document.querySelectorAll('.section-number.gs-reveal'), { x: -40, y: 0 }, 1);
+        createReveal(document.querySelectorAll('.section-heading.gs-reveal'), { y: 60 }, 1.2);
+        createReveal(document.querySelectorAll('.section-text.gs-reveal'), { y: 40 }, 1);
+        createReveal(document.querySelectorAll('.about-image-wrapper.gs-reveal'), { x: -80, y: 0 }, 1.4);
+        createReveal(document.querySelectorAll('.stat-row.gs-reveal'), { y: 50 }, 1);
+
+        // Gallery: staggered with scrub-like progressive reveal
+        document.querySelectorAll('.gallery-item.gs-reveal').forEach((item, i) => {
+            gsap.fromTo(item,
+                { opacity: 0, visibility: 'hidden', y: 100, scale: 0.92 },
+                {
+                    opacity: 1, visibility: 'visible', y: 0, scale: 1,
+                    duration: 1.2,
+                    delay: i * 0.12,
+                    ease: 'expo.out',
+                    scrollTrigger: { trigger: item, start: 'top 92%', toggleActions: 'play none none none' }
+                }
+            );
+        });
+
+        // Featured video
+        createReveal(document.querySelectorAll('.featured-video-wrapper.gs-reveal'), { y: 80 }, 1.4);
+
+        // Featured video scale-up on scroll (Lenis-style)
+        gsap.fromTo('.featured-video-wrapper', { scale: 0.92 }, {
+            scale: 1,
+            ease: 'none',
+            scrollTrigger: { trigger: '.featured-video', start: 'top 80%', end: 'top 30%', scrub: 0.5 }
+        });
+
+        // Mix cards
+        document.querySelectorAll('.mix-card.gs-reveal').forEach((card, i) => {
+            gsap.fromTo(card,
+                { opacity: 0, visibility: 'hidden', y: 70 },
+                {
+                    opacity: 1, visibility: 'visible', y: 0,
+                    duration: 1,
+                    delay: i * 0.08,
+                    ease: 'expo.out',
+                    scrollTrigger: { trigger: card, start: 'top 90%', toggleActions: 'play none none none' }
+                }
+            );
+        });
+
+        // ================================================================
+        // SERVICE SECTIONS: GSAP SCROLL ANIMATIONS
+        // ================================================================
+        (function initServiceAnimations() {
+            // Reception video — slide up
+            gsap.fromTo('#receptionVideoWrap',
+                { opacity: 0, y: 60, visibility: 'hidden' },
+                {
+                    opacity: 1, y: 0, visibility: 'visible', duration: 1.2, ease: 'expo.out',
+                    scrollTrigger: { trigger: '#receptionVideoWrap', start: 'top 85%', toggleActions: 'play none none none' }
+                }
+            );
+
+            // Services heading + scroll wrapper — reveal on scroll
+            createReveal(document.querySelectorAll('.services-header.gs-reveal'), { y: 40 }, 1);
+            createReveal(document.querySelectorAll('.services-scroll-wrapper.gs-reveal'), { y: 60 }, 1.2);
+
+            // Service cards — tap (touch) + keyboard toggle for overlay
+            document.querySelectorAll('.service-card').forEach(card => {
+                function toggleOverlay() {
+                    const isActive = card.classList.toggle('overlay-active');
+                    const label = card.querySelector('.service-card-label')?.textContent || 'Service';
+                    card.setAttribute('aria-label', isActive
+                        ? label + ' — tap to close'
+                        : label + ' — hover to see details');
+                }
+                card.addEventListener('click', () => {
+                    if (window.matchMedia('(hover: none)').matches) toggleOverlay();
+                });
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleOverlay(); }
+                });
+            });
+
+            // Service parallax — moved into mm.add() below
+        })();
+
+        // ================================================================
+        // BENTO GRID: GSAP STAGGER FADE-IN ON SCROLL
+        // ================================================================
+        (function initBentoAnimations() {
+            const bentoItems = document.querySelectorAll('.bento-item');
+            if (!bentoItems.length) return;
+
+            gsap.set(bentoItems, { opacity: 0, y: 30 });
+
+            ScrollTrigger.create({
+                trigger: '#bentoGrid',
+                start: 'top 85%',
+                once: true,
+                onEnter: () => {
+                    gsap.to(bentoItems, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        stagger: 0.1,
+                        ease: 'power3.out'
+                    });
+                }
+            });
+
+            // #bentoBg parallax — moved into mm.add() below
+        })();
+
+        // Events
+        document.querySelectorAll('.events-list.gs-reveal').forEach(list => {
+            const items = list.querySelectorAll('li');
+            gsap.fromTo(items,
+                { opacity: 0, x: 40 },
+                {
+                    opacity: 1, x: 0, duration: 0.8, stagger: 0.08, ease: 'expo.out',
+                    scrollTrigger: { trigger: list, start: 'top 82%', toggleActions: 'play none none none' }
+                }
+            );
+            gsap.set(list, { opacity: 1, visibility: 'visible' });
+        });
+
+        // Booking CTA
+        createReveal(document.querySelectorAll('.booking-cta .gs-reveal'), { y: 60 }, 1.2);
+
+        // #bookingBgText parallax — moved into mm.add() below
+
+        // Subscribe
+        createReveal(document.querySelectorAll('.subscribe .gs-reveal'), { y: 50 }, 1);
+
+        // ================================================================
+        // ALL PARALLAX — desktop (≥768px) + no preference for reduced motion
+        // mm.add() automatically:
+        //   • runs setup when the media query matches
+        //   • kills & reverts all ScrollTriggers inside when it no longer matches
+        //   • handles resize and orientation changes correctly
+        // ================================================================
+        mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
+
+            // ---- Gallery / About inner-image parallax ----
+            document.querySelectorAll('[data-parallax-img]').forEach(img => {
+                const parent = img.closest('.gallery-item, .about-image');
+                if (!parent) return;
+                gsap.fromTo(img,
+                    { yPercent: -10 },
+                    {
+                        yPercent: 10,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: parent,
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: 0.5
+                        }
+                    }
+                );
+            });
+
+            // ---- Bento background glow layer ----
+            const bentoBg = document.getElementById('bentoBg');
+            if (bentoBg) {
+                gsap.to(bentoBg, {
+                    y: -50,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '#events',
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 1
+                    }
+                });
+            }
+
+            // ---- Reception video wrapper (drifts down — scrolls slower) ----
+            if (document.getElementById('receptionVideoWrap')) {
+                gsap.to('#receptionVideoWrap', {
+                    y: 40,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '#reception',
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 1
+                    }
+                });
+            }
+
+            // ---- Booking CTA background text (horizontal drift) ----
+            gsap.to('#bookingBgText', {
+                xPercent: -15,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.booking-cta',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 0.5
+                }
+            });
+        });
+
+        // ===== STAT COUNT-UP =====
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            const text = stat.textContent;
+            const match = text.match(/(\d+)/);
+            if (match) {
+                const target = parseInt(match[1]);
+                const suffix = text.replace(match[1], '');
+                const obj = { val: 0 };
+                gsap.to(obj, {
+                    val: target, duration: 2.5, ease: 'power2.out',
+                    scrollTrigger: { trigger: stat, start: 'top 85%', toggleActions: 'play none none none' },
+                    onUpdate: () => { stat.textContent = Math.round(obj.val) + suffix; }
+                });
+            }
+        });
+
+        // ================================================================
+        // LIGHTBOX
+        // ================================================================
+        (function initLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightboxImg');
+            const lbClose = document.getElementById('lightboxClose');
+            const lbPrev = document.getElementById('lightboxPrev');
+            const lbNext = document.getElementById('lightboxNext');
+            const lbCounter = document.getElementById('lightboxCounter');
+            const bentoItems = document.querySelectorAll('.bento-item');
+            const images = [
+                'wedding1.png', 'wedding2.png', 'wedding3.png', 'wedding4.png', 'wedding5.png',
+                'wedding6.png', 'wedding7.png', 'wedding8.png', 'wedding9.png', 'wedding10.png'
+            ];
+            let currentIndex = 0;
+            let touchStartX = 0;
+            let focusableEls;
+            let prevFocused;
+
+            function updateCounter() {
+                lbCounter.textContent = (currentIndex + 1) + ' / ' + images.length;
+            }
+
+            function showImage(index) {
+                const duration = prefersReducedMotion ? 0 : 250;
+                lbImg.classList.add('fade-out');
+                setTimeout(() => {
+                    currentIndex = (index + images.length) % images.length;
+                    lbImg.src = images[currentIndex];
+                    lbImg.alt = 'Wedding photo ' + (currentIndex + 1) + ' of ' + images.length;
+                    lightbox.setAttribute('aria-label', 'Wedding photo lightbox — photo ' + (currentIndex + 1) + ' of ' + images.length);
+                    updateCounter();
+                    lbImg.classList.remove('fade-out');
+                }, duration);
+            }
+
+            function openLightbox(index) {
+                prevFocused = document.activeElement;
+                currentIndex = index;
+                lbImg.src = images[currentIndex];
+                lbImg.alt = 'Wedding photo ' + (currentIndex + 1) + ' of ' + images.length;
+                updateCounter();
+                lightbox.setAttribute('aria-label', 'Wedding photo lightbox — photo ' + (currentIndex + 1) + ' of ' + images.length);
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                lenis.stop();
+                // Defer focus so dialog is painted before focus move
+                requestAnimationFrame(() => lbClose.focus());
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                lenis.start();
+                if (prevFocused) prevFocused.focus();
+            }
+
+            // Open on bento click
+            bentoItems.forEach((item) => {
+                item.addEventListener('click', () => {
+                    const idx = parseInt(item.dataset.index, 10);
+                    openLightbox(idx);
+                });
+                item.setAttribute('role', 'button');
+                item.setAttribute('tabindex', '0');
+                item.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openLightbox(parseInt(item.dataset.index, 10));
+                    }
+                });
+            });
+
+            // Navigation
+            lbPrev.addEventListener('click', (e) => { e.stopPropagation(); showImage(currentIndex - 1); });
+            lbNext.addEventListener('click', (e) => { e.stopPropagation(); showImage(currentIndex + 1); });
+            lbClose.addEventListener('click', closeLightbox);
+
+            // Close on backdrop click
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            // Keyboard nav + ESC
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+                if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+                // Focus trap
+                if (e.key === 'Tab') {
+                    const focusable = Array.from(lightbox.querySelectorAll('button, [tabindex]:not([tabindex="-1"])'));
+                    const first = focusable[0];
+                    const last = focusable[focusable.length - 1];
+                    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+                }
+            });
+
+            // Touch swipe
+            lightbox.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+            lightbox.addEventListener('touchend', (e) => {
+                const delta = e.changedTouches[0].screenX - touchStartX;
+                if (Math.abs(delta) > 50) {
+                    if (delta < 0) showImage(currentIndex + 1);
+                    else showImage(currentIndex - 1);
+                }
+            }, { passive: true });
+        })();
+
+        // ===== BEHIND VIDEOS: LAZY LOAD ON SCROLL =====
+        (function initBehindVideos() {
+            const videos = document.querySelectorAll('[data-lazy-video]');
+            if (!videos.length) return;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        if (video.preload === 'none') {
+                            video.preload = 'metadata';
+                        }
+                        observer.unobserve(video);
+                    }
+                });
+            }, { threshold: 0.1 });
+            videos.forEach(v => observer.observe(v));
+        })();
+
+        // =========================================
+        // BOOKING DROPDOWN — Header
+        // =========================================
+        (function bookingDropdown() {
+            const trigger = document.getElementById('bookingTrigger');
+            const panel = document.getElementById('bookingPanel');
+            const closeBtn = document.getElementById('bookingClose');
+
+            if (!trigger || !panel) return;
+
+            function openBooking() {
+                panel.classList.add('active');
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+
+            function closeBooking() {
+                panel.classList.remove('active');
+                trigger.setAttribute('aria-expanded', 'false');
+            }
+
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (panel.classList.contains('active')) {
+                    closeBooking();
+                } else {
+                    openBooking();
+                }
+            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeBooking);
+            }
+
+            document.addEventListener('click', (e) => {
+                if (panel.classList.contains('active') && !panel.contains(e.target) && !trigger.contains(e.target)) {
+                    closeBooking();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && panel.classList.contains('active')) {
+                    closeBooking();
+                }
+            });
+        })();
+
+        // =========================================
+        // BOOKING FORMS — Submission Handler
+        // =========================================
+        document.querySelectorAll('.booking-form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('.booking-form-submit');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<span>Sent!</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+                btn.style.pointerEvents = 'none';
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.pointerEvents = '';
+                    form.reset();
+                }, 3000);
+            });
+        });
+
+    </script>
+</body>
+
+</html>
